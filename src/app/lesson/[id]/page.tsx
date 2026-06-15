@@ -3,8 +3,9 @@ import { redirect, notFound } from 'next/navigation'
 import { getProgress } from '@/lib/kv'
 import { markCompleteAction } from '@/app/actions'
 import lessonsData from '@/data/lessons.json'
-import type { Lesson } from '@/components/CalendarGrid'
+import type { Lesson } from '@/types/lesson'
 import Link from 'next/link'
+import PedroIcon from '@/components/PedroIcon'
 
 interface PageProps {
   params: Promise<{ id: string }>
@@ -70,30 +71,39 @@ export default async function LessonPage({ params }: PageProps) {
         ← Back to Calendar
       </Link>
 
-      {/* Day badge */}
-      <div className="flex items-center gap-3 mb-6">
-        <span
-          className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest"
-          style={{
-            background: 'rgba(245,200,66,0.12)',
-            border: '1px solid rgba(245,200,66,0.35)',
-            color: '#f5c842',
-          }}
-        >
-          🎄 Day {lesson.day}
-        </span>
-        {role === 'admin' && (
-          <span
-            className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest"
-            style={{
-              background: 'rgba(192,57,43,0.12)',
-              border: '1px solid rgba(192,57,43,0.35)',
-              color: '#e74c3c',
-            }}
-          >
-            🔑 Admin
-          </span>
-        )}
+      {/* Day badge & Pedro Icon */}
+      <div className="flex items-center gap-4 mb-6">
+        <PedroIcon
+          day={lesson.day}
+          customIcon={lesson.icon}
+          className="w-12 h-12 rounded-full object-cover border border-[rgba(245,200,66,0.3)] shadow-lg shadow-gold-400/10"
+        />
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center gap-2">
+            <span
+              className="inline-flex items-center px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest"
+              style={{
+                background: 'rgba(245,200,66,0.12)',
+                border: '1px solid rgba(245,200,66,0.35)',
+                color: '#f5c842',
+              }}
+            >
+              🎄 Day {lesson.day}
+            </span>
+            {role === 'admin' && (
+              <span
+                className="inline-flex items-center px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest"
+                style={{
+                  background: 'rgba(192,57,43,0.12)',
+                  border: '1px solid rgba(192,57,43,0.35)',
+                  color: '#e74c3c',
+                }}
+              >
+                🔑 Admin
+              </span>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Title */}

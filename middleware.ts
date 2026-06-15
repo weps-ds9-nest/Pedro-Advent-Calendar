@@ -4,7 +4,7 @@ import { resolveRole } from '@/lib/session'
 
 const PUBLIC_PATHS = ['/login', '/favicon.ico', '/robots.txt']
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Allow public paths and Next.js internals
@@ -29,7 +29,7 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get('auth_token')?.value
 
   // Resolve the opaque token to a role (server-side only — never exposes passwords)
-  const role = token ? resolveRole(token) : null
+  const role = token ? await resolveRole(token) : null
 
   if (!role) {
     const loginUrl = new URL('/login', request.url)

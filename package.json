@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "agent": "npx tsx .agent/agent.ts"
   },
   "dependencies": {
     "@vercel/kv": "^1.0.1",

@@ -2,7 +2,7 @@ import { headers, cookies } from 'next/headers'
 import CalendarGrid from '@/components/CalendarGrid'
 import { getProgress } from '@/lib/kv'
 import lessonsData from '@/data/lessons.json'
-import type { Lesson } from '@/components/CalendarGrid'
+import type { Lesson } from '@/types/lesson'
 import { redirect } from 'next/navigation'
 
 interface PageProps {
@@ -16,7 +16,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
 
   // Validate cookie is still present (double-check, middleware handles redirects)
   const cookieStore = await cookies()
-  if (!cookieStore.get('auth_token')) {
+  if (process.env.DEV_MODE !== 'true' && !cookieStore.get('auth_token')) {
     redirect('/login')
   }
 

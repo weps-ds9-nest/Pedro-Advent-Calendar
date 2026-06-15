@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pedro Pascal Advent Calendar 🎄
+
+An interactive Next.js application that guides learners through web development lessons in advent calendar format.
+
+## Documentation
+- [System Architecture](docs/PROJECT.md)
+- [Architectural Decision Records & Roadmap](docs/DECISIONS.md)
+- [Feature Progression Tracker](docs/PROGRESS.md)
+- [Lesson Data Schema](docs/LESSONS_SCHEMA.md)
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
+### 1. Environment Configuration
+Create a `.env.local` file in the root directory:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Set to true to bypass login authentication locally (forces admin access)
+DEV_MODE=true
+
+# Passwords for credentials testing
+USER_PASSWORD=studentpass
+ADMIN_PASSWORD=adminpass
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Run the Development Server
+Install dependencies and run the server:
+```bash
+npm install
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) to view the application dashboard.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Backstage AI Assistant
+The project features a built-in assistant located in `.agent/` to run backstage task scripts and automation.
 
-## Learn More
+### Compile Lessons
+To convert your markdown lessons from the single `lessons.md` file (or individual markdown files in `content/lessons/`) into the active JSON database:
+```bash
+npm run agent
+```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Manage Skills
+Skills are modular directories located under `.agent/skills/`. To run a specific skill, pass its folder name:
+```bash
+npm run agent md-to-json
+```
+Stubs exist for `impeccable` and `front-end-design` skills, which can be configured for remote or local workflows.

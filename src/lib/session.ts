@@ -1,40 +1,30 @@
-/**
- * Lightweight in-process session store.
- *
- * The auth cookie holds an opaque random token (UUID), never the raw password.
- * This module maps token → role so the middleware / server actions can resolve
- * who the caller is without exposing credentials to the browser.
- *
- * Acceptable for a small internal app with a single server process.
- * Tokens are lost on server restart (users must log in again), which is fine.
- */
+import { getSession, setSession, deleteSession as deleteKvSession } from './kv'
 
-type Role = 'user' | 'admin'
-
-// Module-level singleton — survives across requests within the same process.
-const sessions = new Map<string, Role>()
+export type Role = 'user' | 'admin'
 
 /**
  * Creates a new session for the given role.
  * Returns the opaque token that should be stored in the auth cookie.
  */
-export function createSession(role: Role): string {
+export async function createSession(role: Role): Promise<string> {
   const token = crypto.randomUUID()
-  sessions.set(token, role)
+  await setSession(token, role)
   return token
 }
 
 /**
  * Resolves an opaque token back to a role.
- * Returns null if the token is unknown or expired (server restarted).
+ * Returns null if the token is unknown or expired.
  */
-export function resolveRole(token: string): Role | null {
-  return sessions.get(token) ?? null
+export async function resolveRole(token: string): Promise<Role | null> {
+  const role = await getSession(token)
+  return (role as Role) ?? null
 }
 
 /**
  * Invalidates a session token (logout).
  */
-export function deleteSession(token: string): void {
-  sessions.delete(token)
+export async function deleteSession(token: string): Promise<void> {
+  await deleteKvSession(token)
 }
+

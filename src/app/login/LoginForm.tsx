@@ -1,6 +1,7 @@
 'use client'
 
 import { useActionState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import { loginAction } from '@/app/actions'
 
 const SNOWFLAKES = ['❄', '❅', '❆', '✦', '✧']
@@ -34,10 +35,15 @@ interface LoginFormProps {
 export default function LoginForm({ devMode }: LoginFormProps) {
   const [state, formAction, isPending] = useActionState(loginAction, null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const router = useRouter()
 
   useEffect(() => {
-    if (!devMode) inputRef.current?.focus()
-  }, [devMode])
+    if (devMode) {
+      router.replace('/')
+    } else {
+      inputRef.current?.focus()
+    }
+  }, [devMode, router])
 
   return (
     <main className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#060914]">

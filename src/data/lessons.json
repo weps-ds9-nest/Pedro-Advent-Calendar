@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": 1,
+    "day": 1,
+    "title": "Introduction to Claude Code",
+    "description": "Get started with Claude Code and learn basic operations.",
+    "tip": "Run `claude` in your terminal to begin.",
+    "content": "<p>Welcome to the <strong>Claude Code Advent Calendar</strong>! 🎄<br />This interactive course will guide you through building, deploying, and optimizing applications with Claude.</p>\n<p>In this first lesson, we will cover:<br /><ul><li>Installing the CLI</li><li>Navigating workspace contexts</li><li>Running search and edit commands</li></ul></p>\n<p>Happy coding!</p>"
+  },
+  {
+    "id": 2,
+    "day": 2,
+    "title": "Next.js Routing",
+    "description": "Learn the ins and outs of the Next.js App Router and dynamic paths.",
+    "tip": "Always use Server Components by default unless you need client-side interactivity.",
+    "content": "<p>Today we're building routes!<br />Next.js uses a file-system based router where folders define routes.</p>\n<p>Example route structure:<br /><pre><code>ts<br />src/app/<br />  page.tsx          // matches /<br />  lesson/<br />    [id]/<br />      page.tsx      // matches /lesson/1, /lesson/2, etc.<br /></code></pre></p>\n<p>Let's explore routing further in the next steps.</p>"
+  }
+]

@@ -29,7 +29,7 @@ export async function loginAction(
   }
 
   // Generate an opaque random token — the raw password never goes near the cookie.
-  const token = createSession(role)
+  const token = await createSession(role)
 
   const cookieStore = await cookies()
   cookieStore.set('auth_token', token, {

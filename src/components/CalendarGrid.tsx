@@ -1,15 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-
-export interface Lesson {
-  id: number
-  day: number
-  title: string
-  description?: string
-  content?: string
-  tip?: string
-}
+import type { Lesson } from '@/types/lesson'
+import PedroIcon from '@/components/PedroIcon'
 
 interface Props {
   lessons: Lesson[]
@@ -33,20 +26,6 @@ function LockIcon() {
         strokeWidth={1.5}
         d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
       />
-    </svg>
-  )
-}
-
-function CheckIcon() {
-  return (
-    <svg
-      className="w-5 h-5"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4.5 12.75l6 6 9-13.5" />
     </svg>
   )
 }
@@ -87,7 +66,7 @@ function DoorCard({ lesson, isUnlocked, isCompleted }: {
       </span>
 
       {/* Status icon or number */}
-      <div className="flex items-center justify-center w-10 h-10 rounded-full my-1"
+      <div className="relative flex items-center justify-center w-10 h-10 rounded-full my-1"
         style={{
           background: isCompleted
             ? 'rgba(39,174,96,0.2)'
@@ -96,10 +75,30 @@ function DoorCard({ lesson, isUnlocked, isCompleted }: {
             : 'rgba(255,255,255,0.04)',
         }}
       >
-        {isCompleted ? (
-          <span className="text-[#2ecc71]"><CheckIcon /></span>
-        ) : isUnlocked ? (
-          <span className="text-2xl">🎁</span>
+        {isUnlocked ? (
+          <>
+            <PedroIcon
+              day={lesson.day}
+              customIcon={lesson.icon}
+              className="w-10 h-10 rounded-full object-cover"
+            />
+            {isCompleted && (
+              <span
+                className="absolute -bottom-1 -right-1 flex items-center justify-center w-4 h-4 rounded-full text-white shadow-lg border border-[#111527]"
+                style={{ background: '#2ecc71' }}
+              >
+                <svg
+                  className="w-2.5 h-2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+            )}
+          </>
         ) : (
           <LockIcon />
         )}
