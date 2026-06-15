@@ -58,7 +58,7 @@ export default async function LessonPage({ params }: PageProps) {
   }
 
   // ── Render lesson ────────────────────────────────────────────────────
-  const markCompleteWithId = markCompleteAction.bind(null, id, role)
+  const markCompleteWithId = markCompleteAction.bind(null, id)
 
   return (
     <main className="min-h-screen px-4 py-12 max-w-3xl mx-auto relative z-10">

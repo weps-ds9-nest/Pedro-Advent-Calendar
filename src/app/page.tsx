@@ -81,7 +81,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
       {/* Calendar Grid */}
       <CalendarGrid
         lessons={lessons}
-        completedIds={completedIds}
+        completedDays={completedIds}
         role={role}
         errorDay={errorDayNum}
       />

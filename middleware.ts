@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { resolveRole } from '@/lib/session'
 
 const PUBLIC_PATHS = ['/login', '/favicon.ico', '/robots.txt']
 
@@ -14,17 +15,21 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  const authToken = request.cookies.get('auth_token')?.value
-  const userPassword = process.env.USER_PASSWORD
-  const adminPassword = process.env.ADMIN_PASSWORD
-
-  let role: string | null = null
-
-  if (userPassword && authToken === userPassword) {
-    role = 'user'
-  } else if (adminPassword && authToken === adminPassword) {
-    role = 'admin'
+  // ── DEV MODE bypass ────────────────────────────────────────────────────────
+  // Set DEV_MODE=true in .env.local to skip auth entirely during development.
+  // Never set this in production — remove the variable or set it to anything
+  // other than "true".
+  if (process.env.DEV_MODE === 'true') {
+    const response = NextResponse.next()
+    response.headers.set('x-user-role', 'admin')
+    return response
   }
+  // ── End DEV MODE ───────────────────────────────────────────────────────────
+
+  const token = request.cookies.get('auth_token')?.value
+
+  // Resolve the opaque token to a role (server-side only — never exposes passwords)
+  const role = token ? resolveRole(token) : null
 
   if (!role) {
     const loginUrl = new URL('/login', request.url)

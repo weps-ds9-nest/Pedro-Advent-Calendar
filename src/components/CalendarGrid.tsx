@@ -13,7 +13,7 @@ export interface Lesson {
 
 interface Props {
   lessons: Lesson[]
-  completedIds: number[]
+  completedDays: number[]
   role: string
   errorDay?: number | null
 }
@@ -134,7 +134,7 @@ function DoorCard({ lesson, isUnlocked, isCompleted }: {
   )
 }
 
-export default function CalendarGrid({ lessons, completedIds, role, errorDay }: Props) {
+export default function CalendarGrid({ lessons, completedDays, role, errorDay }: Props) {
   // Pad to 24 slots if fewer lessons exist
   const days = Array.from({ length: 24 }, (_, i) => {
     const dayNum = i + 1
@@ -168,12 +168,12 @@ export default function CalendarGrid({ lessons, completedIds, role, errorDay }: 
       {/* Grid */}
       <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3">
         {days.map((lesson) => {
-          const isCompleted = completedIds.includes(lesson.day)
+          const isCompleted = completedDays.includes(lesson.day)
           // Day 1 always unlocked; others unlock when previous is done
           const isUnlocked =
             role === 'admin' ||
             lesson.day === 1 ||
-            completedIds.includes(lesson.day - 1)
+            completedDays.includes(lesson.day - 1)
           return (
             <DoorCard
               key={lesson.day}
