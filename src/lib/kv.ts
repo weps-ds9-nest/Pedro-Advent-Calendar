@@ -13,6 +13,7 @@ const DEV_MODE = process.env.DEV_MODE === 'true'
 const TOTAL_LESSONS = 24
 
 // ── Dev-mode local file store ────────────────────────────────────────────────
+/* eslint-disable @typescript-eslint/no-require-imports, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars */
 // Dynamically import fs/path on server side Node runtime to avoid Edge Runtime bundling errors.
 let fs: any = null
 let path: any = null
@@ -65,6 +66,7 @@ async function memDelete(key: string): Promise<void> {
   delete store[key]
   saveDevStore(store)
 }
+/* eslint-enable @typescript-eslint/no-require-imports, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars */
 
 // ── KV client (production only) ──────────────────────────────────────────────
 
@@ -118,6 +120,23 @@ export async function markComplete(role: string, id: number): Promise<void> {
   if (!current.includes(id)) {
     await kv.set(key, [...current, id])
   }
+}
+
+/**
+ * Sets the exact list of completed lesson IDs for a given role.
+ */
+export async function setProgress(role: string, ids: number[]): Promise<void> {
+  if (role === 'admin') return
+
+  const key = `progress:${role}`
+
+  if (DEV_MODE) {
+    await memSet(key, ids)
+    return
+  }
+
+  const kv = await getKvClient()
+  await kv.set(key, ids)
 }
 
 /**

@@ -20,9 +20,18 @@ export async function middleware(request: NextRequest) {
   // Never set this in production — remove the variable or set it to anything
   // other than "true".
   if (process.env.DEV_MODE === 'true') {
-    const response = NextResponse.next()
-    response.headers.set('x-user-role', 'admin')
-    return response
+    const requestHeaders = new Headers(request.headers)
+    const devRole = request.cookies.get('dev_role')?.value ?? 'admin'
+    const activeRole = (devRole === 'user' || devRole === 'student') ? 'user' : 'admin'
+    
+    requestHeaders.set('x-actual-role', 'admin')
+    requestHeaders.set('x-user-role', activeRole)
+    
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    })
   }
   // ── End DEV MODE ───────────────────────────────────────────────────────────
 
@@ -36,10 +45,23 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl)
   }
 
-  // Pass role downstream via a request header
-  const response = NextResponse.next()
-  response.headers.set('x-user-role', role)
-  return response
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('x-actual-role', role)
+
+  let activeRole = role
+  if (role === 'admin') {
+    const devRole = request.cookies.get('dev_role')?.value
+    if (devRole === 'user' || devRole === 'student') {
+      activeRole = 'user'
+    }
+  }
+  requestHeaders.set('x-user-role', activeRole)
+
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  })
 }
 
 export const config = {

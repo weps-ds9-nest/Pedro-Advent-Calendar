@@ -2,7 +2,7 @@
 
 import { cookies, headers } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { createSession, resolveRole } from '@/lib/session'
+import { createSession } from '@/lib/session'
 import { markComplete } from '@/lib/kv'
 
 // ── Login ──────────────────────────────────────────────────────────────────
@@ -53,9 +53,23 @@ export async function markCompleteAction(id: number) {
   // Resolve role from the middleware-injected header (set from the opaque cookie token)
   const headerStore = await headers()
   const role = headerStore.get('x-user-role') ?? 'user'
+  const actualRole = headerStore.get('x-actual-role')
 
-  await markComplete(role, id)
+  const targetRole = (actualRole === 'admin' && role === 'user') ? 'simulated' : role
+  await markComplete(targetRole, id)
 
   const nextId = id + 1
   redirect(nextId <= 24 ? `/lesson/${nextId}` : '/')
+}
+
+/**
+ * Marks a lesson as complete without redirecting (for modal UI).
+ */
+export async function markCompleteNoRedirect(id: number) {
+  const headerStore = await headers()
+  const role = headerStore.get('x-user-role') ?? 'user'
+  const actualRole = headerStore.get('x-actual-role')
+
+  const targetRole = (actualRole === 'admin' && role === 'user') ? 'simulated' : role
+  await markComplete(targetRole, id)
 }

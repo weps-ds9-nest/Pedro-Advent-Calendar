@@ -1,6 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Geist } from 'next/font/google'
 import './globals.css'
+import { cn } from "@/lib/utils";
+import { headers } from 'next/headers'
+import { getProgress } from '@/lib/kv'
+import AdminToolbar from '@/components/AdminToolbar'
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const inter = Inter({
   subsets: ['latin'],
@@ -14,14 +20,30 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const headerStore = await headers()
+  const actualRole = headerStore.get('x-actual-role')
+  const userRole = headerStore.get('x-user-role') ?? 'user'
+
+  const showToolbar = actualRole === 'admin'
+  const completedSimulated = showToolbar ? await getProgress('simulated') : []
+
   return (
-    <html lang="en" className={`${inter.variable} h-full`}>
-      <body className="min-h-full bg-[#0a0d1a] text-slate-100 antialiased font-sans">
+    <html lang="en" className={cn("dark h-full", inter.variable, "font-sans", geist.variable)}>
+      <body className={cn(
+        "min-h-full bg-[#0a0d1a] text-slate-100 antialiased font-sans",
+        showToolbar && "pt-10"
+      )}>
+        {showToolbar && (
+          <AdminToolbar
+            currentRole={userRole === 'admin' ? 'admin' : 'student'}
+            initialCompletedCount={completedSimulated.length}
+          />
+        )}
         {children}
       </body>
     </html>

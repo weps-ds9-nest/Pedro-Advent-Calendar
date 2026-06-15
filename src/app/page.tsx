@@ -1,5 +1,5 @@
 import { headers, cookies } from 'next/headers'
-import CalendarGrid from '@/components/CalendarGrid'
+import Dashboard from '@/components/Dashboard'
 import { getProgress } from '@/lib/kv'
 import lessonsData from '@/data/lessons.json'
 import type { Lesson } from '@/types/lesson'
@@ -13,6 +13,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
   // Get role from middleware-injected header
   const headerStore = await headers()
   const role = headerStore.get('x-user-role') ?? 'user'
+  const actualRole = headerStore.get('x-actual-role')
 
   // Validate cookie is still present (double-check, middleware handles redirects)
   const cookieStore = await cookies()
@@ -20,7 +21,9 @@ export default async function DashboardPage({ searchParams }: PageProps) {
     redirect('/login')
   }
 
-  const completedIds = await getProgress(role)
+  // Determine target role for progress tracking
+  const targetRole = (actualRole === 'admin' && role === 'user') ? 'simulated' : role
+  const completedIds = await getProgress(targetRole)
   const params = await searchParams
 
   // Parse error day from a richer error param like "locked-3"
@@ -28,7 +31,6 @@ export default async function DashboardPage({ searchParams }: PageProps) {
   if (params.error?.startsWith('locked-')) {
     errorDayNum = parseInt(params.error.replace('locked-', ''), 10)
   }
-
 
   const lessons = lessonsData as Lesson[]
 
@@ -78,8 +80,8 @@ export default async function DashboardPage({ searchParams }: PageProps) {
         )}
       </header>
 
-      {/* Calendar Grid */}
-      <CalendarGrid
+      {/* Dashboard container with Grid + Modal */}
+      <Dashboard
         lessons={lessons}
         completedDays={completedIds}
         role={role}

@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import type { Lesson } from '@/types/lesson'
 import PedroIcon from '@/components/PedroIcon'
 
@@ -9,6 +8,7 @@ interface Props {
   completedDays: number[]
   role: string
   errorDay?: number | null
+  onLessonClick?: (id: number) => void
 }
 
 function LockIcon() {
@@ -30,10 +30,11 @@ function LockIcon() {
   )
 }
 
-function DoorCard({ lesson, isUnlocked, isCompleted }: {
+function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
   lesson: Lesson
   isUnlocked: boolean
   isCompleted: boolean
+  onClick?: () => void
 }) {
   const cardContent = (
     <div
@@ -123,17 +124,18 @@ function DoorCard({ lesson, isUnlocked, isCompleted }: {
   }
 
   return (
-    <Link
-      href={`/lesson/${lesson.id}`}
-      className="advent-door block"
+    <button
+      type="button"
+      onClick={onClick}
+      className="advent-door block w-full text-left bg-transparent border-0 p-0 cursor-pointer"
       aria-label={`Week ${lesson.day}${lesson.title ? ` — ${lesson.title}` : ''}${isCompleted ? ' (completed)' : ''}`}
     >
       {cardContent}
-    </Link>
+    </button>
   )
 }
 
-export default function CalendarGrid({ lessons, completedDays, role, errorDay }: Props) {
+export default function CalendarGrid({ lessons, completedDays, role, errorDay, onLessonClick }: Props) {
   // Pad to 24 slots if fewer lessons exist
   const days = Array.from({ length: 24 }, (_, i) => {
     const dayNum = i + 1
@@ -179,6 +181,7 @@ export default function CalendarGrid({ lessons, completedDays, role, errorDay }:
               lesson={lesson}
               isUnlocked={isUnlocked}
               isCompleted={isCompleted}
+              onClick={onLessonClick ? () => onLessonClick(lesson.id) : undefined}
             />
           )
         })}

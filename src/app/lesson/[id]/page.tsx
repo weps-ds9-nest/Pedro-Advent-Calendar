@@ -22,16 +22,18 @@ export default async function LessonPage({ params }: PageProps) {
   // ── Role from middleware ────────────────────────────────────────────
   const headerStore = await headers()
   const role = headerStore.get('x-user-role') ?? 'user'
+  const actualRole = headerStore.get('x-actual-role')
 
-  // Double-check auth cookie
+  // Double-check auth cookie (skip in DEV_MODE — mirrors the dashboard guard)
   const cookieStore = await cookies()
-  if (!cookieStore.get('auth_token')) {
+  if (process.env.DEV_MODE !== 'true' && !cookieStore.get('auth_token')) {
     redirect('/login')
   }
 
   // ── Sequential gating (users only) ─────────────────────────────────
   if (role !== 'admin') {
-    const completedIds = await getProgress(role)
+    const targetRole = (actualRole === 'admin' && role === 'user') ? 'simulated' : role
+    const completedIds = await getProgress(targetRole)
     if (id > 1 && !completedIds.includes(id - 1)) {
       redirect(`/?error=locked-${id}`)
     }

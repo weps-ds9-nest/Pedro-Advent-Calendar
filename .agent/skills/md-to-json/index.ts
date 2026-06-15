@@ -114,65 +114,6 @@ function parseFrontmatter(content: string): { data: Record<string, string>; body
   return { data: {}, body: content }
 }
 
-function parseSingleFile(content: string): LessonData[] {
-  const lines = content.split('\n')
-  const lessons: LessonData[] = []
-  let currentLesson: LessonData | null = null
-  let currentBodyLines: string[] = []
-
-  const headerRegex = /^(?:#+)\s*Day\s+(\d+)\s*[:\-\s]*(.*)$/i
-
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i]
-    const match = line.match(headerRegex)
-
-    if (match) {
-      // Save previous lesson
-      if (currentLesson) {
-        currentLesson.content = parseMarkdownToHtml(currentBodyLines.join('\n'))
-        lessons.push(currentLesson)
-      }
-
-      const dayNum = parseInt(match[1], 10)
-      const title = match[2].trim()
-
-      currentLesson = {
-        id: dayNum,
-        day: dayNum,
-        title: title || `Day ${dayNum}`,
-      }
-      currentBodyLines = []
-    } else if (currentLesson) {
-      // Parse description/tip from top lines of the body
-      const descMatch = line.match(/^\s*(?:\*\*|\*)?Description:(?:\*\*|\*)?\s*(.*)$/i)
-      const tipMatch = line.match(/^\s*(?:\*\*|\*)?Tip:(?:\*\*|\*)?\s*(.*)$/i)
-
-      if (descMatch) {
-        currentLesson.description = descMatch[1].trim()
-      } else if (tipMatch) {
-        currentLesson.tip = tipMatch[1].trim()
-      } else {
-        // Look for YAML frontmatter boundaries in the body if any
-        currentBodyLines.push(line)
-      }
-    }
-  }
-
-  if (currentLesson) {
-    currentLesson.content = parseMarkdownToHtml(currentBodyLines.join('\n'))
-    lessons.push(currentLesson)
-  }
-
-  // Parse frontmatter inside body lines if present
-  return lessons.map((lesson) => {
-    if (lesson.content) {
-      const rawBody = lesson.content // note: content here is still raw before conversion, wait
-    }
-    // Wait, let's fix: if body has frontmatter, parse it before converting to HTML
-    return lesson
-  })
-}
-
 // Refined single file parser that checks for frontmatter or headers
 function parseLessonsMarkdown(content: string): LessonData[] {
   // Split the file on day headings
@@ -197,7 +138,7 @@ function parseLessonsMarkdown(content: string): LessonData[] {
     // Parse description and tip if not in frontmatter
     let description = data.description || data.desc
     let tip = data.tip || data.proTip
-    let finalTitle = data.title || title || `Day ${dayNum}`
+    const finalTitle = data.title || title || `Week ${dayNum}`
     
     const bodyLines = body.split('\n')
     const contentLines: string[] = []
