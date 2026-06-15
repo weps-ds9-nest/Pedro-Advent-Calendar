@@ -55,7 +55,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
           Advent Calendar 🎄
         </p>
         <p className="text-slate-400 mt-3 text-sm">
-          Complete each day sequentially to unlock the next lesson.
+          Complete each week sequentially to unlock the next lesson.
         </p>
 
         {/* Progress bar (user only) */}
@@ -63,7 +63,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
           <div className="mt-6 max-w-sm mx-auto">
             <div className="flex justify-between text-xs text-slate-500 mb-1.5">
               <span>Progress</span>
-              <span>{completedIds.length} / 24 days</span>
+              <span>{completedIds.length} / 24 weeks</span>
             </div>
             <div className="w-full rounded-full h-2 overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
               <div

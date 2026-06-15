@@ -57,12 +57,12 @@ function DoorCard({ lesson, isUnlocked, isCompleted }: {
         opacity: !isUnlocked ? 0.55 : 1,
       }}
     >
-      {/* Day number */}
+      {/* Week number */}
       <span
         className="text-xs font-bold uppercase tracking-widest mb-1"
         style={{ color: isCompleted ? '#2ecc71' : isUnlocked ? '#f5c842' : '#475569' }}
       >
-        Day {lesson.day}
+        Week {lesson.day}
       </span>
 
       {/* Status icon or number */}
@@ -116,7 +116,7 @@ function DoorCard({ lesson, isUnlocked, isCompleted }: {
 
   if (!isUnlocked) {
     return (
-      <div className="advent-door" aria-label={`Day ${lesson.day} — locked`}>
+      <div className="advent-door" aria-label={`Week ${lesson.day} — locked`}>
         {cardContent}
       </div>
     )
@@ -126,7 +126,7 @@ function DoorCard({ lesson, isUnlocked, isCompleted }: {
     <Link
       href={`/lesson/${lesson.id}`}
       className="advent-door block"
-      aria-label={`Day ${lesson.day}${lesson.title ? ` — ${lesson.title}` : ''}${isCompleted ? ' (completed)' : ''}`}
+      aria-label={`Week ${lesson.day}${lesson.title ? ` — ${lesson.title}` : ''}${isCompleted ? ' (completed)' : ''}`}
     >
       {cardContent}
     </Link>
@@ -159,7 +159,7 @@ export default function CalendarGrid({ lessons, completedDays, role, errorDay }:
         >
           <span>🔒</span>
           <span>
-            You need to complete <strong>Day {errorDay - 1}</strong> before accessing Day {errorDay}.
+            You need to complete <strong>Week {errorDay - 1}</strong> before accessing Week {errorDay}.
           </span>
         </div>
       )}

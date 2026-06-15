@@ -48,7 +48,7 @@ export default async function LessonPage({ params }: PageProps) {
         <div className="text-center max-w-md">
           <div className="text-6xl mb-6">🚧</div>
           <h1 className="text-2xl font-bold text-slate-100 mb-3">Coming Soon</h1>
-          <p className="text-slate-400 mb-6">Day {id} content hasn&apos;t been published yet. Check back soon!</p>
+          <p className="text-slate-400 mb-6">Week {id} content hasn&apos;t been published yet. Check back soon!</p>
           <Link href="/" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-colors"
             style={{ background: 'rgba(245,200,66,0.15)', color: '#f5c842', border: '1px solid rgba(245,200,66,0.3)' }}>
             ← Back to Calendar
@@ -88,7 +88,7 @@ export default async function LessonPage({ params }: PageProps) {
                 color: '#f5c842',
               }}
             >
-              🎄 Day {lesson.day}
+              🎄 Week {lesson.day}
             </span>
             {role === 'admin' && (
               <span
@@ -151,7 +151,7 @@ export default async function LessonPage({ params }: PageProps) {
         {role !== 'admin' && (
           <form action={markCompleteWithId}>
             <button
-              id={`mark-complete-day-${id}`}
+              id={`mark-complete-week-${id}`}
               type="submit"
               className="px-6 py-3 rounded-xl font-semibold text-sm tracking-wide transition-all duration-200 hover:scale-105 active:scale-95"
               style={{
@@ -177,7 +177,7 @@ export default async function LessonPage({ params }: PageProps) {
                 color: '#94a3b8',
               }}
             >
-              ← Day {id - 1}
+              ← Week {id - 1}
             </Link>
           )}
           {id < 24 && role === 'admin' && (
@@ -190,7 +190,7 @@ export default async function LessonPage({ params }: PageProps) {
                 color: '#f5c842',
               }}
             >
-              Day {id + 1} →
+              Week {id + 1} →
             </Link>
           )}
         </div>

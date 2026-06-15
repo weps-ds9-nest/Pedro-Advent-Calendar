@@ -32,7 +32,7 @@ export default function PedroIcon({ day, customIcon, className }: PedroIconProps
   return (
     <img
       src={imgSrc}
-      alt={`Day ${day}`}
+      alt={`Week ${day}`}
       className={className}
       onError={handleError}
     />
