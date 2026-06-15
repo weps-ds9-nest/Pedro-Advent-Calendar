@@ -47,17 +47,41 @@ body {
     );
 }
 
-/* ── Advent door card ─────────────────────────────────────────────── */
+/* ── Advent door card ────────────────────────────────────────────── */
 .advent-door {
   perspective: 800px;
 }
 
 .advent-door-inner {
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  /* Springy scale — cubic-bezier(0.34, 1.56, 0.64, 1) per DESIGN.md motion spec */
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+.advent-door button:hover .advent-door-inner,
 .advent-door-inner:hover {
-  transform: translateY(-4px) scale(1.02);
+  transform: scale(1.06);
+}
+
+.advent-door button:active .advent-door-inner,
+.advent-door-inner:active {
+  transform: scale(0.97);
+  transition-duration: 0.08s;
+}
+
+/* Reduced motion — crossfade instead of scale */
+@media (prefers-reduced-motion: reduce) {
+  .advent-door-inner {
+    transition: opacity 0.15s ease;
+  }
+  .advent-door button:hover .advent-door-inner,
+  .advent-door-inner:hover {
+    transform: none;
+    opacity: 0.85;
+  }
+  .advent-door button:active .advent-door-inner,
+  .advent-door-inner:active {
+    transform: none;
+  }
 }
 
 /* ── Gold shimmer ──────────────────────────────────────────────────── */

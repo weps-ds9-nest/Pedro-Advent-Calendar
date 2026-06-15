@@ -14,18 +14,14 @@ interface Props {
 function LockIcon() {
   return (
     <svg
-      className="lock-pulse w-6 h-6 text-slate-500"
+      className="w-5 h-5 text-slate-700"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
       aria-hidden="true"
     >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1.5}
-        d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
-      />
+      <rect x="5" y="11" width="14" height="10" rx="1" strokeWidth="2" />
+      <path d="M8 11V7a4 4 0 0 1 8 0v4" strokeWidth="2" />
     </svg>
   )
 }
@@ -38,42 +34,44 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
 }) {
   const cardContent = (
     <div
-      className="advent-door-inner relative flex flex-col items-center justify-center rounded-2xl p-4 h-28 cursor-pointer select-none"
+      className="advent-door-inner relative flex flex-col items-center justify-center p-4 h-28 select-none"
       style={{
+        // Flat tonal layering — no gradients, no box-shadows per DESIGN.md "Flat Layering Rule"
         background: isCompleted
-          ? 'linear-gradient(135deg, rgba(39,174,96,0.25), rgba(39,174,96,0.08))'
+          ? 'rgba(39,174,96,0.12)'
           : isUnlocked
-          ? 'linear-gradient(135deg, rgba(245,200,66,0.18), rgba(245,200,66,0.04))'
-          : 'rgba(17,21,39,0.7)',
+          ? 'rgba(245,200,66,0.08)'
+          : '#111527',
         border: isCompleted
-          ? '1px solid rgba(39,174,96,0.45)'
+          ? '2px solid rgba(39,174,96,0.55)'
           : isUnlocked
-          ? '1px solid rgba(245,200,66,0.4)'
-          : '1px solid rgba(255,255,255,0.07)',
-        boxShadow: isCompleted
-          ? '0 4px 24px rgba(39,174,96,0.12)'
-          : isUnlocked
-          ? '0 4px 24px rgba(245,200,66,0.1)'
-          : 'none',
-        opacity: !isUnlocked ? 0.55 : 1,
+          ? '2px solid rgba(245,200,66,0.5)'
+          : '2px solid rgba(255,255,255,0.06)',
+        borderRadius: '4px',
+        opacity: !isUnlocked ? 0.5 : 1,
       }}
     >
-      {/* Week number */}
+      {/* Week label — short monospace label per DESIGN.md Typography rules */}
       <span
-        className="text-xs font-bold uppercase tracking-widest mb-1"
-        style={{ color: isCompleted ? '#2ecc71' : isUnlocked ? '#f5c842' : '#475569' }}
+        className="text-[9px] font-bold uppercase tracking-wider mb-1"
+        style={{
+          fontFamily: "'Press Start 2P', 'Courier New', monospace",
+          color: isCompleted ? '#2ecc71' : isUnlocked ? '#f5c842' : '#3a4060',
+        }}
       >
-        Week {lesson.day}
+        W{String(lesson.day).padStart(2, '0')}
       </span>
 
-      {/* Status icon or number */}
-      <div className="relative flex items-center justify-center w-10 h-10 rounded-full my-1"
+      {/* Icon area — flat square container per retro spec */}
+      <div
+        className="relative flex items-center justify-center w-10 h-10 my-1"
         style={{
           background: isCompleted
-            ? 'rgba(39,174,96,0.2)'
+            ? 'rgba(39,174,96,0.15)'
             : isUnlocked
-            ? 'rgba(245,200,66,0.15)'
-            : 'rgba(255,255,255,0.04)',
+            ? 'rgba(245,200,66,0.12)'
+            : 'rgba(255,255,255,0.03)',
+          borderRadius: '2px',
         }}
       >
         {isUnlocked ? (
@@ -81,12 +79,14 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
             <PedroIcon
               day={lesson.day}
               customIcon={lesson.icon}
-              className="w-10 h-10 rounded-full object-cover"
+              className="w-9 h-9 object-cover"
+              style={{ borderRadius: '2px' }}
             />
             {isCompleted && (
               <span
-                className="absolute -bottom-1 -right-1 flex items-center justify-center w-4 h-4 rounded-full text-white shadow-lg border border-[#111527]"
-                style={{ background: '#2ecc71' }}
+                className="absolute -bottom-1 -right-1 flex items-center justify-center w-4 h-4 text-white border border-[#111527]"
+                style={{ background: '#27ae60', borderRadius: '2px' }}
+                aria-hidden="true"
               >
                 <svg
                   className="w-2.5 h-2.5"
@@ -105,10 +105,12 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
         )}
       </div>
 
-      {/* Title (only if unlocked and has content) */}
+      {/* Title — sans-serif body per Typography rules, visible on unlocked only */}
       {isUnlocked && lesson.title && (
-        <p className="text-[10px] text-center leading-tight mt-1 line-clamp-2"
-          style={{ color: isCompleted ? 'rgba(46,204,113,0.8)' : 'rgba(245,200,66,0.8)' }}>
+        <p
+          className="text-[10px] text-center leading-tight mt-1 line-clamp-2"
+          style={{ color: isCompleted ? 'rgba(46,204,113,0.8)' : 'rgba(245,200,66,0.75)' }}
+        >
           {lesson.title}
         </p>
       )}
@@ -127,7 +129,7 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
     <button
       type="button"
       onClick={onClick}
-      className="advent-door block w-full text-left bg-transparent border-0 p-0 cursor-pointer"
+      className="advent-door block w-full text-left bg-transparent border-0 p-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f5c842] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d1a]"
       aria-label={`Week ${lesson.day}${lesson.title ? ` — ${lesson.title}` : ''}${isCompleted ? ' (completed)' : ''}`}
     >
       {cardContent}
@@ -136,7 +138,6 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
 }
 
 export default function CalendarGrid({ lessons, completedDays, role, errorDay, onLessonClick }: Props) {
-  // Pad to 24 slots if fewer lessons exist
   const days = Array.from({ length: 24 }, (_, i) => {
     const dayNum = i + 1
     return lessons.find((l) => l.day === dayNum) ?? {
@@ -148,29 +149,27 @@ export default function CalendarGrid({ lessons, completedDays, role, errorDay, o
 
   return (
     <div className="w-full">
-      {/* Error banner */}
       {errorDay && (
         <div
           role="alert"
-          className="mb-6 px-4 py-3 rounded-xl text-sm flex items-center gap-2"
+          className="mb-6 px-4 py-3 text-sm flex items-center gap-2"
           style={{
-            background: 'rgba(192,57,43,0.15)',
-            border: '1px solid rgba(192,57,43,0.35)',
+            background: 'rgba(192,57,43,0.12)',
+            border: '2px solid rgba(192,57,43,0.4)',
+            borderRadius: '4px',
             color: '#e74c3c',
           }}
         >
-          <span>🔒</span>
+          <span aria-hidden="true">🔒</span>
           <span>
-            You need to complete <strong>Week {errorDay - 1}</strong> before accessing Week {errorDay}.
+            Complete <strong>Week {errorDay - 1}</strong> before accessing Week {errorDay}.
           </span>
         </div>
       )}
 
-      {/* Grid */}
       <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3">
         {days.map((lesson) => {
           const isCompleted = completedDays.includes(lesson.day)
-          // Day 1 always unlocked; others unlock when previous is done
           const isUnlocked =
             role === 'admin' ||
             lesson.day === 1 ||
@@ -187,18 +186,30 @@ export default function CalendarGrid({ lessons, completedDays, role, errorDay, o
         })}
       </div>
 
-      {/* Legend */}
+      {/* Legend — square swatches, monospace labels per retro spec */}
       <div className="flex items-center gap-6 mt-6 text-xs text-slate-500">
-        <span className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full inline-block" style={{ background: '#f5c842' }} />
+        <span className="flex items-center gap-2">
+          <span
+            className="inline-block w-3 h-3"
+            style={{ background: 'rgba(245,200,66,0.5)', border: '2px solid #f5c842', borderRadius: '2px' }}
+            aria-hidden="true"
+          />
           Unlocked
         </span>
-        <span className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full inline-block" style={{ background: '#2ecc71' }} />
+        <span className="flex items-center gap-2">
+          <span
+            className="inline-block w-3 h-3"
+            style={{ background: 'rgba(39,174,96,0.4)', border: '2px solid #2ecc71', borderRadius: '2px' }}
+            aria-hidden="true"
+          />
           Completed
         </span>
-        <span className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full inline-block" style={{ background: 'rgba(255,255,255,0.1)' }} />
+        <span className="flex items-center gap-2">
+          <span
+            className="inline-block w-3 h-3"
+            style={{ background: 'rgba(255,255,255,0.04)', border: '2px solid rgba(255,255,255,0.06)', borderRadius: '2px' }}
+            aria-hidden="true"
+          />
           Locked
         </span>
       </div>

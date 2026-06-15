@@ -40,3 +40,34 @@ Welcome! This is the master guidelines document for the Pedro Advent Calendar pr
 - **Lint Code**: `npm run lint`
 - **Run Agent (Compile Markdown to JSON)**: `npm run agent`
 - **Sync Instructions**: `npm run agent:sync`
+
+## Design Context
+
+> Full spec lives in [`PRODUCT.md`](./PRODUCT.md) and [`DESIGN.md`](./DESIGN.md). Read those files before making UI changes.
+
+- **Register**: `brand` — design IS the product; delight and visual identity are first-class concerns.
+- **Personality**: Retro · Playful · Interactive (8-bit holiday aesthetic, pixelated icons, springy transitions).
+- **Creative North Star**: "Pixelized Holiday Workshop"
+
+### Color roles
+| Token | Hex | Role |
+|---|---|---|
+| `--color-gold-500` | `#e0b020` | Primary action, progress, highlights |
+| `--color-gold-400` | `#f5c842` | Hover/accent state, shimmer |
+| `--color-navy-950` | `#060914` | Deep background canvas |
+| `--color-navy-900` | `#0a0d1a` | Page backgrounds |
+| `--color-navy-800` | `#111527` | Surface panels, card backgrounds |
+| `--color-navy-700` | `#1a1f38` | Default borders, dividers |
+| `--color-jade-500` | `#27ae60` | Completed state |
+| `--color-crimson-500` | `#c0392b` | Admin / error state |
+
+### Typography rules
+- **Display / headings / badges**: `Press Start 2P, Courier New, monospace` — short labels only.
+- **Body / lesson copy**: `Inter, ui-sans-serif, system-ui` — max line length 70ch.
+
+### Hard rules (never break)
+1. **No soft shadows or glassmorphism.** Depth via tonal layering and solid colour-tinted borders only.
+2. **No gradient text** (`background-clip: text`). Gold shimmer on the hero logo is the only exception and it already exists.
+3. **Monospace only for labels.** Never use `Press Start 2P` on multi-line reading content.
+4. **Springy transitions must honour `prefers-reduced-motion`** — wrap all `cubic-bezier(0.34, 1.56, 0.64, 1)` eases in a `@media (prefers-reduced-motion: reduce)` override.
+5. **Impeccable live mode** is pre-configured — run `/impeccable live` to iterate UI directly in the browser.

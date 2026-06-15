@@ -6,9 +6,10 @@ interface PedroIconProps {
   day: number
   customIcon?: string
   className?: string
+  style?: React.CSSProperties
 }
 
-export default function PedroIcon({ day, customIcon, className }: PedroIconProps) {
+export default function PedroIcon({ day, customIcon, className, style }: PedroIconProps) {
   const dayStr = String(day).padStart(2, '0')
   const defaultWebp = `/icons/pedro-${dayStr}.webp`
   const defaultPng = `/icons/pedro-${dayStr}.png`
@@ -34,6 +35,7 @@ export default function PedroIcon({ day, customIcon, className }: PedroIconProps
       src={imgSrc}
       alt={`Week ${day}`}
       className={className}
+      style={style}
       onError={handleError}
     />
   )

@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-15T12:53:00Z",
+  "title": "Design System: Pedro Pascal Advent Calendar",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Gold-500",
+        "canonical": "oklch(76% 0.17 81)",
+        "tonalRamp": [
+          "oklch(20% 0.17 81)",
+          "oklch(30% 0.17 81)",
+          "oklch(40% 0.17 81)",
+          "oklch(50% 0.17 81)",
+          "oklch(60% 0.17 81)",
+          "oklch(70% 0.17 81)",
+          "oklch(80% 0.17 81)",
+          "oklch(95% 0.10 81)"
+        ]
+      },
+      "accent": {
+        "role": "secondary",
+        "displayName": "Gold-400",
+        "canonical": "oklch(82% 0.19 83)",
+        "tonalRamp": [
+          "oklch(22% 0.19 83)",
+          "oklch(32% 0.19 83)",
+          "oklch(42% 0.19 83)",
+          "oklch(52% 0.19 83)",
+          "oklch(62% 0.19 83)",
+          "oklch(72% 0.19 83)",
+          "oklch(82% 0.19 83)",
+          "oklch(95% 0.12 83)"
+        ]
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "Navy-900",
+        "canonical": "oklch(10% 0.03 245)",
+        "tonalRamp": [
+          "oklch(10% 0.03 245)",
+          "oklch(20% 0.03 245)",
+          "oklch(30% 0.03 245)",
+          "oklch(40% 0.03 245)",
+          "oklch(50% 0.03 245)",
+          "oklch(60% 0.03 245)",
+          "oklch(75% 0.02 245)",
+          "oklch(95% 0.01 245)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Navy-800",
+        "canonical": "oklch(16% 0.04 242)",
+        "tonalRamp": [
+          "oklch(12% 0.04 242)",
+          "oklch(18% 0.04 242)",
+          "oklch(25% 0.04 242)",
+          "oklch(35% 0.04 242)",
+          "oklch(45% 0.04 242)",
+          "oklch(55% 0.04 242)",
+          "oklch(70% 0.03 242)",
+          "oklch(92% 0.01 242)"
+        ]
+      },
+      "jade": {
+        "role": "neutral",
+        "displayName": "Jade-500",
+        "canonical": "oklch(63% 0.17 145)",
+        "tonalRamp": [
+          "oklch(20% 0.17 145)",
+          "oklch(30% 0.17 145)",
+          "oklch(40% 0.17 145)",
+          "oklch(50% 0.17 145)",
+          "oklch(60% 0.17 145)",
+          "oklch(70% 0.17 145)",
+          "oklch(80% 0.15 145)",
+          "oklch(95% 0.08 145)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display Monospace",
+        "purpose": "Advent course logo, titles, and calendar headers only."
+      },
+      "body": {
+        "displayName": "Body Sans",
+        "purpose": "Course reading materials, steps, and general content copy."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "springy-scale",
+        "value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        "purpose": "Springy scale up and active door highlights."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Standard action button for proceeding in lessons or submitting quizzes.",
+      "html": "<button class=\"ds-btn-primary\">START LESSON</button>",
+      "css": ".ds-btn-primary { background: #e0b020; color: #060914; font-family: 'Press Start 2P', Courier New, monospace; font-size: 11px; font-weight: 700; padding: 8px 16px; border: 2px solid #1a1f38; border-radius: 2px; cursor: pointer; transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.15s ease; } .ds-btn-primary:hover { background: #f5c842; transform: scale(1.05); } .ds-btn-primary:active { transform: scale(0.98); } @media (prefers-reduced-motion: reduce) { .ds-btn-primary { transition: none; } .ds-btn-primary:hover { transform: none; } }"
+    },
+    {
+      "name": "Advent Calendar Door",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Standard calendar card grid component representing a single weekly lesson.",
+      "html": "<div class=\"ds-door ds-door-active\"><div class=\"ds-door-header\">WEEK 01</div><div class=\"ds-door-icon\">🎄</div><div class=\"ds-door-footer\">ACTIVE</div></div>",
+      "css": ".ds-door { width: 120px; height: 120px; background: #111527; border: 2px solid #1a1f38; border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 10px; font-family: 'Press Start 2P', Courier New, monospace; font-size: 9px; color: #a0a5b5; cursor: pointer; transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s ease; } .ds-door-active { border-color: #e0b020; color: #e0b020; } .ds-door-active:hover { transform: scale(1.08); background: #171c36; } .ds-door-header { font-size: 8px; font-weight: 700; } .ds-door-icon { font-size: 24px; } .ds-door-footer { font-size: 7px; letter-spacing: 0.5px; } @media (prefers-reduced-motion: reduce) { .ds-door { transition: none; } .ds-door-active:hover { transform: none; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Pixelized Holiday Workshop",
+    "overview": "A cozy pixel-art workspace focusing on build-and-learn, retro typography, and festive ornaments. The design layout is high-contrast, playful, and responsive, mimicking the aesthetics of a classic 8-bit holiday game.",
+    "keyCharacteristics": [
+      "Monospace retro heading styles paired with highly readable sans-serif content text.",
+      "Solid color-tinted borders to denote container boundaries and interactive states.",
+      "High-energy micro-animations (springy scale-ups, bouncy door unlocks) that respect user reduced-motion preferences."
+    ],
+    "rules": [
+      {
+        "name": "The Contrast Spark Rule",
+        "body": "Bright accents (gold, jade, crimson) are used exclusively to guide the user's attention. Surfacing and structure must rely strictly on Navy tones to maintain visual comfort.",
+        "section": "colors"
+      },
+      {
+        "name": "The Monospace Accent Rule",
+        "body": "Monospace text is strictly reserved for short headers, status badges, buttons, and numeric counters. All paragraphs, descriptions, and long-form lesson content must use the sans-serif body stack.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Layering Rule",
+        "body": "Surfaces are flat at rest. Depth is established through distinct background fills and solid, color-tinted border lines. Do not use box-shadows or backdrop-filters.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do pair retro monospace headers with clean sans-serif body copy.",
+      "Do use flat, solid, color-tinted borders to group and layer elements.",
+      "Do add springy scale transitions to interactive buttons and doors, wrapping them in prefers-reduced-motion media query checks."
+    ],
+    "donts": [
+      "Don't use a basic corporate SaaS admin template look with thin gray borders.",
+      "Don't use soft drop-shadows or glassmorphism/blurs.",
+      "Don't use gradient text backgrounds."
+    ]
+  }
+}
