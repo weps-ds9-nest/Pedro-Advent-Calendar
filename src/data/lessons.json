@@ -2,17 +2,193 @@
   {
     "id": 1,
     "day": 1,
-    "title": "Introduction to Claude Code",
-    "description": "Get started with Claude Code and learn basic operations.",
-    "tip": "Run `claude` in your terminal to begin.",
-    "content": "<p>Welcome to the <strong>Claude Code Advent Calendar</strong>! 🎄<br />This interactive course will guide you through building, deploying, and optimizing applications with Claude.</p>\n<p>In this first lesson, we will cover:<br /><ul><li>Installing the CLI</li><li>Navigating workspace contexts</li><li>Running search and edit commands</li></ul></p>\n<p>Happy coding!</p>"
+    "title": "Meeting the Terminal & Claude Code",
+    "description": "Get comfortable opening a terminal, moving around folders, and starting/stopping a Claude Code session.",
+    "tip": "Run `claude` in your terminal to start a session, and `Ctrl+C` or `exit` to stop it.",
+    "content": "<p><strong>Phase 1 — Foundations</strong></p>\n<p>Welcome to Week 1! Before we touch Claude Code, we need to feel at home in the terminal. Think of it as learning to walk in a new city before running.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>What a terminal is and what <em>\"the current directory\"</em> means</li>\n<li><code>pwd</code> — print working directory (\"where am I?\")</li>\n<li><code>ls</code> — list files in the current folder</li>\n<li><code>cd</code> — change directory (move into a folder)</li>\n<li><code>mkdir</code> — create a new folder</li>\n<li>Installing Claude Code and logging in</li>\n<li>Starting Claude Code with <code>claude</code>, exiting with <code>Ctrl+C</code> / <code>exit</code></li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Create a folder called <code>research-playground</code> on your Desktop, <code>cd</code> into it, and open Claude Code there. Ask it: <em>\"What folder am I in and what's in it?\"</em> — notice how it answers.</p>\n<p><strong>Make it yours:</strong> Practice navigating to 2–3 different folders on your computer (Desktop, Documents, a project folder) using only <code>cd</code> and <code>ls</code> — no mouse allowed.</p>"
   },
   {
     "id": 2,
     "day": 2,
-    "title": "Next.js Routing",
-    "description": "Learn the ins and outs of the Next.js App Router and dynamic paths.",
-    "tip": "Always use Server Components by default unless you need client-side interactivity.",
-    "content": "<p>Today we're building routes!<br />Next.js uses a file-system based router where folders define routes.</p>\n<p>Example route structure:<br /><pre><code>ts<br />src/app/<br />  page.tsx          // matches /<br />  lesson/<br />    [id]/<br />      page.tsx      // matches /lesson/1, /lesson/2, etc.<br /></code></pre></p>\n<p>Let's explore routing further in the next steps.</p>"
+    "title": "Talking to Claude Code",
+    "description": "Learn the basic conversational loop — asking, reading responses, and referencing files.",
+    "tip": "Reference any file in your project with @filename so Claude can read it directly.",
+    "content": "<p><strong>Phase 1 — Foundations</strong></p>\n<p>Claude Code isn't just a chatbot — it can read, create, and modify your files. This week we learn how to have a real conversation with it about your actual documents.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>Prompting basics: be specific, give context, ask for one thing at a time</li>\n<li>Referencing a file with <code>@filename</code> to let Claude read it</li>\n<li>Asking Claude to read, explain, or summarize a file</li>\n<li>Asking Claude to create a simple text or markdown file</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Drop a short text file (e.g. a paragraph of notes) into <code>research-playground</code>. Ask Claude to read it (<code>@notes.txt</code>) and summarize it in 3 bullet points. Then ask it to save that summary as a new file.</p>\n<p><strong>Make it yours:</strong> Take any short document you have — an email, a meeting note — and have Claude summarize it the same way. Compare it to your own mental summary.</p>"
+  },
+  {
+    "id": 3,
+    "day": 3,
+    "title": "Projects, Context & Safety",
+    "description": "Understand how Claude Code \"remembers\" a project and how to stay in control of what it does.",
+    "tip": "Use Plan Mode to have Claude propose what it's about to do before it does anything.",
+    "content": "<p><strong>Phase 1 — Foundations</strong></p>\n<p>Claude Code can take actions on your files — which is powerful but requires trust. This week we learn how to keep control while still letting Claude do useful work.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li><code>CLAUDE.md</code> — the project's \"instructions file\" (intro only; we'll use it for real in Week 9)</li>\n<li>The approval/permission flow: Claude asks before editing or creating files</li>\n<li><strong>Plan Mode</strong>: ask Claude to <em>propose</em> a plan before doing anything</li>\n<li>Undoing or reverting a change if something goes wrong</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Ask Claude (in Plan Mode) to propose a folder structure for organizing <em>\"research notes.\"</em> Review the plan together, then approve it and watch it create the folders.</p>\n<p><strong>Make it yours:</strong> Practice saying <em>no</em> — ask Claude to do something, then reject its proposed plan and ask for a different approach. Notice how it responds.</p>"
+  },
+  {
+    "id": 4,
+    "day": 4,
+    "title": "First Real Research Task",
+    "description": "Apply everything so far to one real, low-stakes research artifact.",
+    "tip": "Ask Claude to do one thing at a time: summarize first, then extract quotes, then save — don't bundle it all in one prompt.",
+    "content": "<p><strong>Phase 1 — Foundations</strong></p>\n<p>Time to put theory into practice. This week we run a complete mini-workflow on a real interview transcript using the skills we've built over the last 3 weeks.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>Organizing a small project folder (e.g. <code>interview-001/</code>)</li>\n<li>Asking Claude to extract specific things from a document: quotes, pain points, feature requests</li>\n<li>Generating a markdown summary report</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Use one real (or anonymized/sample) interview transcript. Ask Claude to:</p>\n<ol>\n<li>Summarize the interview in plain language</li>\n<li>Pull out 5 direct quotes about pain points</li>\n<li>Save the result as <code>interview-001-summary.md</code></li>\n</ol>\n<p><strong>Make it yours:</strong> Repeat the full process with a second transcript entirely on your own — no guidance. Note where you felt confident and where you hesitated.</p>"
+  },
+  {
+    "id": 5,
+    "day": 5,
+    "title": "Working Across Multiple Transcripts",
+    "description": "Move from processing one document to synthesizing a whole set — the core of research work.",
+    "tip": "Ask Claude about cross-cutting themes across all files, not just per-document summaries.",
+    "content": "<p><strong>Phase 2 — Research Workflow Foundations</strong></p>\n<p>Real research rarely lives in a single file. This week we scale up: instead of one transcript, we work with a folder of them and start looking for patterns across participants.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>Putting multiple transcripts in one folder</li>\n<li>Asking Claude to read all files in a folder at once</li>\n<li>Asking for <em>cross-cutting</em> themes vs. per-document summaries</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>With 3 transcripts in a folder, ask Claude: <em>\"What themes appear across all three interviews? For each theme, list which participant(s) mentioned it and a representative quote.\"</em></p>\n<p><strong>Make it yours:</strong> Try rephrasing the same request 2–3 different ways and compare the outputs. This builds intuition for prompting — small wording changes can produce very different results.</p>"
+  },
+  {
+    "id": 6,
+    "day": 6,
+    "title": "Coding & Tagging Qualitative Data",
+    "description": "Build a lightweight codebook — the foundation of structured qualitative analysis.",
+    "tip": "Start with Claude's suggested codes, then refine — it's faster to edit than to build from scratch.",
+    "content": "<p><strong>Phase 2 — Research Workflow Foundations</strong></p>\n<p>Qualitative coding is the backbone of rigorous research. This week we bring that discipline into Claude Code, creating a structured table of quotes and codes we can actually use.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>Asking Claude to tag quotes with codes (e.g. <em>\"navigation confusion,\"</em> <em>\"pricing concern\"</em>)</li>\n<li>Generating a simple CSV or markdown table of <strong>quote → code → source</strong></li>\n<li>Iterating on a codebook: adding, merging, and renaming codes</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Ask Claude to go through your transcripts and produce a table: quote, suggested code, participant. Review it together and refine 2–3 codes that feel off or too broad.</p>\n<p><strong>Make it yours:</strong> Add a 4th transcript and ask Claude to apply the <em>same</em> codebook to it — testing for consistency across your dataset.</p>"
+  },
+  {
+    "id": 7,
+    "day": 7,
+    "title": "Affinity Mapping & Synthesis",
+    "description": "Go from tagged quotes to grouped insights — a digital affinity map.",
+    "tip": "Save your synthesis as a structured markdown document so it's easy to share and revisit.",
+    "content": "<p><strong>Phase 2 — Research Workflow Foundations</strong></p>\n<p>Affinity mapping is where individual observations become shared insights. This week we take last week's tagged data and let Claude help us see the bigger picture.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>Asking Claude to cluster codes and quotes into higher-level themes</li>\n<li>Structuring output as a hierarchy: <strong>theme → sub-theme → supporting quotes</strong></li>\n<li>Saving the synthesis as a structured markdown document</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Using last week's tagged data, ask Claude to group the codes into 3–5 higher-level themes. Have it produce a one-page synthesis document with supporting evidence (quotes) for each theme.</p>\n<p><strong>Make it yours:</strong> Share this synthesis doc with a teammate and note where it needs human judgment vs. where Claude got it right. That gap is valuable information.</p>"
+  },
+  {
+    "id": 8,
+    "day": 8,
+    "title": "Custom Slash Commands",
+    "description": "Turn repeated prompts into reusable one-word commands.",
+    "tip": "Name your commands after the action, not the tool — `/summarize-interview` is clearer than `/run-claude`.",
+    "content": "<p><strong>Phase 2 — Research Workflow Foundations</strong></p>\n<p>If you find yourself typing the same prompt every week, it's time to automate it. Custom slash commands let you turn any repeatable workflow into a single reusable trigger.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>What a custom slash command is and where it lives in your project</li>\n<li>Creating a personal command, e.g. <code>/summarize-interview</code></li>\n<li>Adding simple arguments to a command (e.g. passing in a filename)</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Write a <code>/summarize-interview</code> command that takes a transcript file and produces the Week 4-style summary automatically. Test it on a new transcript you haven't used before.</p>\n<p><strong>Make it yours:</strong> Create a second command, <code>/tag-quotes</code>, based on the Week 6 coding workflow — your codebook applied automatically.</p>"
+  },
+  {
+    "id": 9,
+    "day": 9,
+    "title": "CLAUDE.md as a Research Assistant Config",
+    "description": "Give Claude standing instructions so every research task follows your preferences by default.",
+    "tip": "Include your codebook conventions and file naming rules in CLAUDE.md — Claude reads it automatically at the start of every session.",
+    "content": "<p><strong>Phase 2 — Research Workflow Foundations</strong></p>\n<p>Tired of reminding Claude how you like things done? <code>CLAUDE.md</code> is your way of teaching it once and having it remember every time. This week we build a real config for research work.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>Writing a <code>CLAUDE.md</code> for a research project: tone, output format, codebook conventions, file naming</li>\n<li>How Claude reads this file automatically at the start of every session in that project</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Write a <code>CLAUDE.md</code> together that includes rules like: <em>\"Always output summaries in markdown with this structure... Always use this codebook... Always cite participant IDs, never names.\"</em> Then re-run a Week 5 task and compare the consistency of the output.</p>\n<p><strong>Make it yours:</strong> Add 2–3 of your own personal preferences to the file — a specific report template you like, a citation style, a tone of voice.</p>"
+  },
+  {
+    "id": 10,
+    "day": 10,
+    "title": "Mini-Project 1: End-to-End Synthesis",
+    "description": "Independently run a small but complete research synthesis from scratch.",
+    "tip": "Use everything you've built: your folder structure, your custom commands, your CLAUDE.md. See how far the system takes you before you need to intervene.",
+    "content": "<p><strong>Phase 2 — Research Workflow Foundations</strong></p>\n<p>This is your first solo flight. No step-by-step guidance — just you, your tools, and a real dataset.</p>\n<p><strong>The mission (mostly solo):</strong></p>\n<p>Using 3–5 real interviews, work through the full pipeline:</p>\n<ol>\n<li>Organize the folder structure</li>\n<li>Run your custom commands</li>\n<li>Produce a tagged dataset</li>\n<li>Create an affinity-style synthesis</li>\n<li>Write a final findings document</li>\n</ol>\n<p>Use <em>only</em> what you've learned in Weeks 1–9.</p>\n<p><strong>Debrief questions:</strong></p>\n<ul>\n<li>What felt smooth and automatic?</li>\n<li>Where did you get stuck or fall back to manual work?</li>\n<li>What would you want to automate next?</li>\n</ul>\n<p>Your answers will shape the focus of the next phase.</p>"
+  },
+  {
+    "id": 11,
+    "day": 11,
+    "title": "Working with Survey & Spreadsheet Data",
+    "description": "Bring quantitative data (CSV/Excel survey exports) into the same research workflow.",
+    "tip": "Ask Claude to connect survey results back to your interview themes — it's surprisingly good at spotting alignment and contradictions.",
+    "content": "<p><strong>Phase 3 — Data, Visuals &amp; Deliverables</strong></p>\n<p>Real research is mixed-methods. This week we expand beyond interviews and bring in survey data — learning to treat quantitative findings as a companion to qualitative insights.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>Asking Claude to read a CSV/XLSX and describe its structure</li>\n<li>Basic descriptive stats: counts, averages, top responses</li>\n<li>Connecting quantitative findings to qualitative themes from earlier weeks</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Give Claude a survey export. Ask it to summarize the top 5 responses per question, then ask: <em>\"Do any of these results support or contradict the themes from our interview synthesis?\"</em></p>\n<p><strong>Make it yours:</strong> Ask Claude to flag any survey results that <em>surprised</em> it given the qualitative data. These tensions are often the most interesting findings.</p>"
+  },
+  {
+    "id": 12,
+    "day": 12,
+    "title": "Visualizing Research Data",
+    "description": "Turn findings into simple charts and diagrams ready for sharing with stakeholders.",
+    "tip": "Always ask Claude to propose 2 different ways to visualize a finding — you'll often pick the one you didn't think of first.",
+    "content": "<p><strong>Phase 3 — Data, Visuals &amp; Deliverables</strong></p>\n<p>A finding buried in a markdown file doesn't drive decisions. Charts and diagrams do. This week we learn to turn research outputs into visuals that communicate at a glance.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>Asking Claude to generate a chart from survey data</li>\n<li>Asking Claude to create a simple diagram (e.g. a journey map or theme map)</li>\n<li>Saving visuals alongside written findings in the same project folder</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>From the survey data, generate one bar chart of a key question's results. Separately, ask Claude to sketch a simple <em>\"theme map\"</em> diagram summarizing the Week 7 synthesis.</p>\n<p><strong>Make it yours:</strong> Pick one finding you'd present to stakeholders and have Claude propose 2 different ways to visualize it — then choose the one that communicates more clearly.</p>"
+  },
+  {
+    "id": 13,
+    "day": 13,
+    "title": "Polished Deliverables (Word & Slides)",
+    "description": "Produce stakeholder-ready outputs — not just markdown notes.",
+    "tip": "If your team uses a specific report template, describe its structure to Claude in detail and it will match it closely.",
+    "content": "<p><strong>Phase 3 — Data, Visuals &amp; Deliverables</strong></p>\n<p>Markdown is great for thinking; Word and slides are great for communicating. This week we take our research and package it into formats that work in the real world.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>Asking Claude to turn a findings document into a Word document</li>\n<li>Asking Claude to draft a slide outline or deck for a readout</li>\n<li>Light formatting requests: headings, executive summary, appendix structure</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Take the Week 10 findings document and ask Claude to produce:</p>\n<ol>\n<li>A one-page Word summary</li>\n<li>A short slide outline for a team readout</li>\n</ol>\n<p><strong>Make it yours:</strong> Adjust the tone and structure to match a real template your team uses — if you have one, share it with Claude and ask it to mirror the format.</p>"
+  },
+  {
+    "id": 14,
+    "day": 14,
+    "title": "Specialized Subagents for Research Roles",
+    "description": "Use focused AI \"personas\" for different parts of the research process.",
+    "tip": "Give each subagent a very narrow job description — the more focused the role, the more consistent the output.",
+    "content": "<p><strong>Phase 3 — Data, Visuals &amp; Deliverables</strong></p>\n<p>Not every research task requires the same mindset. A good coder is meticulous; a good synthesizer is a big-picture thinker. This week we set up specialized subagents for each role.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>What a subagent is: a specialized assistant configured for a specific task</li>\n<li>Setting up a <em>\"coder\"</em> subagent (tags quotes with strict codebook rules)</li>\n<li>Setting up a <em>\"synthesizer\"</em> subagent (writes executive summaries)</li>\n<li>When to use subagents vs. just asking directly</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Set up one subagent focused only on quote-tagging, and one focused only on writing executive summaries. Run the same dataset through both separately, then compare the results to a single general request.</p>\n<p><strong>Make it yours:</strong> Identify one recurring research task in your workflow that would benefit from a dedicated subagent — something you do often and want done consistently.</p>"
+  },
+  {
+    "id": 15,
+    "day": 15,
+    "title": "Light Automation",
+    "description": "Reduce manual repetitive steps in your research workflow.",
+    "tip": "Time your automated workflow vs. the manual version — the numbers are great for showing value to your team.",
+    "content": "<p><strong>Phase 3 — Data, Visuals &amp; Deliverables</strong></p>\n<p>The best workflow is one you barely have to think about. This week we remove the friction: instead of running commands one-by-one, we set things up to process entire folders automatically.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>Simple automation: auto-running a command on new files, batch-processing a folder of transcripts</li>\n<li>Intro to hooks — just enough to see the concept, not a deep dive</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Set up a workflow where dropping multiple transcripts into a folder and running <strong>one command</strong> processes all of them (summary + tags) in one go.</p>\n<p><strong>Make it yours:</strong> Time how long this takes vs. doing it manually one-by-one. This is a concrete number you can use to show value to your team or stakeholders.</p>"
+  },
+  {
+    "id": 16,
+    "day": 16,
+    "title": "Mini-Project 2: Mixed-Methods Pipeline",
+    "description": "Combine everything: qualitative, quantitative, visuals, and a polished deliverable — all in one run.",
+    "tip": "Don't start from scratch — use your template folder, your CLAUDE.md, and your custom commands from the very beginning.",
+    "content": "<p><strong>Phase 3 — Data, Visuals &amp; Deliverables</strong></p>\n<p>This is your second solo project — and the most ambitious yet. You have every tool you need. This week is about proving it to yourself.</p>\n<p><strong>The mission (mostly solo):</strong></p>\n<p>Using a real or sample dataset (a handful of transcripts + a survey export), independently produce:</p>\n<ol>\n<li>A tagged qualitative dataset</li>\n<li>A synthesis document with themes and supporting evidence</li>\n<li>At least one chart or visual</li>\n<li>A polished Word or slide summary</li>\n</ol>\n<p>Use your custom commands, your <code>CLAUDE.md</code>, and subagents where they help.</p>\n<p><strong>Debrief:</strong> Where were the gaps in your system? What still required too much manual effort? These gaps shape Phase 4 — building something you can run independently forever.</p>"
+  },
+  {
+    "id": 17,
+    "day": 17,
+    "title": "Designing a Reusable Research Repo",
+    "description": "Create a folder and template structure you can reuse for every new research project.",
+    "tip": "Name folders with numbers (01-, 02-) so they always sort in the order you actually work through them.",
+    "content": "<p><strong>Phase 4 — Building Your Own Research System</strong></p>\n<p>Starting a new project from a blank folder every time is friction you don't need. This week we design a reusable template so you can hit the ground running on any new study.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>Designing a standard project structure, e.g.:\n<pre><code>01-raw-data/\n02-tagged/\n03-synthesis/\n04-deliverables/</code></pre></li>\n<li>A reusable <code>CLAUDE.md</code> template for new projects</li>\n<li>Copying a template folder to start a new project</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Design and create a template folder together. Test it by simulating a <em>\"new fake project\"</em> — copy the template, rename it, and go through the motions of starting fresh.</p>\n<p><strong>Make it yours:</strong> Refine the folder names and structure to match how your team already organizes research, if applicable. Consistency with your team's expectations makes adoption easier.</p>"
+  },
+  {
+    "id": 18,
+    "day": 18,
+    "title": "Your Personal Command Library",
+    "description": "Consolidate and expand your custom slash commands into a personal research toolkit.",
+    "tip": "Write a short cheat sheet of your commands and what each does — future-you will thank present-you.",
+    "content": "<p><strong>Phase 4 — Building Your Own Research System</strong></p>\n<p>By now you have a growing collection of commands. This week we audit, clean up, and expand them — turning a loose collection into a coherent personal toolkit.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>Reviewing commands built so far: <code>/summarize-interview</code>, <code>/tag-quotes</code>, and others</li>\n<li>Adding 2–3 new commands based on gaps identified in the mini-projects</li>\n<li>Organizing commands so they're easy to find and remember</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Audit your current command library. Fix any commands that feel clunky or produce inconsistent output. Add at least one new command that addresses a gap you noticed in Week 16.</p>\n<p><strong>Make it yours:</strong> Write a short <em>\"cheat sheet\"</em> of all your commands and what each does — keep it somewhere you'll actually look at it.</p>"
+  },
+  {
+    "id": 19,
+    "day": 19,
+    "title": "Connecting External Tools (MCP)",
+    "description": "Pull research artifacts from and push outputs to the tools you already use.",
+    "tip": "Start with whichever tool would save you the most copy-paste time — even one connection changes your daily workflow.",
+    "content": "<p><strong>Phase 4 — Building Your Own Research System</strong></p>\n<p>Your research doesn't live only in terminal folders — it's spread across Notion, Google Drive, and shared documents. This week we bridge the gap using MCP connectors.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>What MCP connectors are, at a high level (bridges between Claude Code and external tools)</li>\n<li>Connecting one relevant tool — Notion, Google Drive, or whatever you actually use</li>\n<li>Asking Claude to pull a document from that tool, or save output back to it</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Connect one tool. Try a complete <em>round trip</em>: pull a real document in, do something useful with it (summarize, tag, synthesize), then push a result back out.</p>\n<p><strong>Make it yours:</strong> Even if you don't set up every connection today, identify which tool would save you the most time if it were connected. That's your priority for the future.</p>"
+  },
+  {
+    "id": 20,
+    "day": 20,
+    "title": "Working with Images & Screenshots",
+    "description": "Bring visual research artifacts — prototype screenshots, usability stills, sketches — into the workflow.",
+    "tip": "Share 2–3 screenshots at once and ask Claude to compare them — it's surprisingly good at spotting consistency issues.",
+    "content": "<p><strong>Phase 4 — Building Your Own Research System</strong></p>\n<p>Not all research lives in text. Usability sessions, prototype reviews, and field studies produce images that carry information text can't capture. This week we bring visuals into the workflow.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>Sharing an image with Claude and asking it to describe or analyze it</li>\n<li>Asking Claude to compare two screenshots (e.g. before/after a design change)</li>\n<li>Combining image analysis with written findings in one document</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Share 2–3 screenshots from a usability session or prototype. Ask Claude to note usability concerns visible in each, then fold that visual analysis into a findings document alongside interview data.</p>\n<p><strong>Make it yours:</strong> Try this with a real prototype screen you've been testing — the closer to your actual work, the more useful the output.</p>"
+  },
+  {
+    "id": 21,
+    "day": 21,
+    "title": "Tackling Bigger, Messier Datasets",
+    "description": "Build confidence handling larger or more complex research datasets without losing structure.",
+    "tip": "Use Plan Mode for big datasets — have Claude propose its analysis approach before executing anything.",
+    "content": "<p><strong>Phase 4 — Building Your Own Research System</strong></p>\n<p>Not every project is 3 tidy transcripts. Real research can be 15 interviews, multiple survey waves, and stakeholder notes all mixed together. This week we build the confidence to handle that scale.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>Extended thinking for complex, multi-step analysis requests</li>\n<li>Using Plan Mode for large tasks: <em>\"Here's 15 transcripts — propose how you'd approach synthesis before doing it\"</em></li>\n<li>Breaking a large task into stages and executing one at a time</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Take the largest dataset you have access to (real project, anonymized if needed). Use Plan Mode to have Claude propose an analysis approach, refine the plan together, then execute it in stages.</p>\n<p><strong>Make it yours:</strong> Reflect on how this differs from your usual manual process — what's meaningfully faster, and what still needs your human judgment?</p>"
+  },
+  {
+    "id": 22,
+    "day": 22,
+    "title": "Version Control & Collaboration Basics",
+    "description": "Learn just enough Git to keep a history of your research work and share it with teammates.",
+    "tip": "Think of `git commit` as hitting Save in a video game — it creates a checkpoint you can always return to.",
+    "content": "<p><strong>Phase 4 — Building Your Own Research System</strong></p>\n<p>You don't need to become a developer to use Git. You just need enough to protect your work from accidental changes and share it with teammates. That's exactly what this week covers.</p>\n<p><strong>New concepts &amp; commands:</strong></p>\n<ul>\n<li>What Git is for: a <em>\"save history\"</em> for folders and files</li>\n<li><code>git init</code> — turn a folder into a tracked repository</li>\n<li><code>git add</code> — stage files to be saved</li>\n<li><code>git commit</code> — create a checkpoint with a message</li>\n<li>Viewing history to see what changed and when</li>\n<li>Sharing a project folder with a teammate</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Turn your template repo from Week 17 into a Git repo. Make a deliberate change to one file, commit it with a descriptive message, and look at the history together.</p>\n<p><strong>Make it yours:</strong> The goal here is <em>comfort, not mastery</em>. You don't need to learn branching or merging — just enough to feel safe making changes.</p>"
+  },
+  {
+    "id": 23,
+    "day": 23,
+    "title": "Assembling \"The System\"",
+    "description": "Put every piece together into one coherent, documented personal research system.",
+    "tip": "Writing the documentation is the test — if you can explain it clearly, you actually understand it.",
+    "content": "<p><strong>Phase 4 — Building Your Own Research System</strong></p>\n<p>All the pieces exist. This week we assemble them into one coherent system — and document it so you (and future teammates) can use it without thinking.</p>\n<p><strong>This week is mostly review &amp; integration:</strong></p>\n<ul>\n<li>Reviewing: template repo, <code>CLAUDE.md</code> config, command library, any subagents, any MCP connectors</li>\n<li>Writing a short <em>\"how I use Claude Code for research\"</em> guide for yourself (and future teammates)</li>\n</ul>\n<p><strong>This week's exercise:</strong></p>\n<p>Walk through the full system end-to-end on a small new dataset — from raw transcripts to polished deliverable — using <em>only</em> your own templates, commands, and config. Then write a one-page guide documenting the system as it stands today.</p>\n<p><strong>Make it yours:</strong> Identify 1–2 things you'd still like to improve. These become optional follow-ups after Week 24 — your personal research and development backlog.</p>"
+  },
+  {
+    "id": 24,
+    "day": 24,
+    "title": "Capstone: Independent Research Project",
+    "description": "Demonstrate full independence and set yourself up for continued growth beyond this program.",
+    "tip": "Keep iterating on your CLAUDE.md and command library after today — the best research systems grow with the researcher.",
+    "content": "<p><strong>Phase 4 — Building Your Own Research System</strong></p>\n<p>This is it. No guidance, no exercises, no facilitator looking over your shoulder. Just you and your system — the one you've been building for 23 weeks.</p>\n<p><strong>The capstone:</strong></p>\n<p>Run one complete research workflow — from raw data to stakeholder-ready deliverable — entirely on your own, using your personal system, on a real or realistic project.</p>\n<p><strong>Wrap-up reflection:</strong></p>\n<ul>\n<li>What parts of the system worked exactly as intended?</li>\n<li>What would you change for the next project?</li>\n<li>What do you want to learn next? (Deeper automation? More MCP connectors? Advanced visualizations?)</li>\n</ul>\n<p><strong>Where to go from here:</strong></p>\n<p>The learning doesn't stop at Week 24. Keep exploring the <a href=\"https://docs.claude.com\" target=\"_blank\">Claude Code documentation</a>, keep refining your <code>CLAUDE.md</code>, and keep adding to your command library as your workflow evolves. You've built a system — now make it yours.</p>\n<p>🎉 <strong>Congratulations on completing the program.</strong></p>"
   }
 ]
