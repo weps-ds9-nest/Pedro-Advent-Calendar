@@ -8,6 +8,7 @@ interface LessonData {
   description?: string
   content?: string
   tip?: string
+  tasks?: string[]
 }
 
 // Simple regex-based markdown-to-HTML parser (zero external dependencies)
@@ -142,20 +143,35 @@ function parseLessonsMarkdown(content: string): LessonData[] {
     
     const bodyLines = body.split('\n')
     const contentLines: string[] = []
-    
+    const tasks: string[] = []
+    let inTasksSection = false
+
     for (const line of bodyLines) {
       const descMatch = line.match(/^\s*(?:\*\*|\*)?Description:(?:\*\*|\*)?\s*(.*)$/i)
       const tipMatch = line.match(/^\s*(?:\*\*|\*)?Tip:(?:\*\*|\*)?\s*(.*)$/i)
-      
-      if (descMatch && !description) {
-        description = descMatch[1].trim()
-      } else if (tipMatch && !tip) {
-        tip = tipMatch[1].trim()
-      } else {
+      const tasksHeader = line.match(/^\s*#{1,3}\s*Tasks\s*$/i)
+      const taskItem = line.match(/^\s*[-*]\s+\[[ x]?\]\s*(.*)|^\s*[-*]\s+(.*)/)
+
+      if (tasksHeader) {
+        inTasksSection = true
+      } else if (inTasksSection && taskItem) {
+        const text = (taskItem[1] || taskItem[2] || '').trim()
+        if (text) tasks.push(text)
+      } else if (inTasksSection && line.match(/^\s*#{1,3}\s/)) {
+        // Another header ends the tasks section
+        inTasksSection = false
         contentLines.push(line)
+      } else if (!inTasksSection) {
+        if (descMatch && !description) {
+          description = descMatch[1].trim()
+        } else if (tipMatch && !tip) {
+          tip = tipMatch[1].trim()
+        } else {
+          contentLines.push(line)
+        }
       }
     }
-    
+
     lessons.push({
       id: dayNum,
       day: dayNum,
@@ -163,6 +179,7 @@ function parseLessonsMarkdown(content: string): LessonData[] {
       description: description ? description.replace(/^["']|["']$/g, '') : undefined,
       tip: tip ? tip.replace(/^["']|["']$/g, '') : undefined,
       content: parseMarkdownToHtml(contentLines.join('\n')),
+      tasks: tasks.length > 0 ? tasks : undefined,
     })
   }
   

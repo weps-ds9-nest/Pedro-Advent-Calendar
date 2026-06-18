@@ -34,6 +34,7 @@ export default function LessonModal({
   const [loading, setLoading] = useState(false)
   const [marking, setMarking] = useState(false)
   const [localCompleted, setLocalCompleted] = useState<number[]>(completedDays)
+  const [checkedTasks, setCheckedTasks] = useState<Set<number>>(new Set())
   const contentRef = useRef<HTMLDivElement>(null)
 
   // Sync prop changes (e.g. after router.refresh)
@@ -46,6 +47,7 @@ export default function LessonModal({
     if (!lessonId) return
     setLoading(true)
     setLesson(null)
+    setCheckedTasks(new Set())
     fetch(`/api/lesson/${lessonId}`)
       .then((r) => r.json())
       .then((data) => {
@@ -80,12 +82,12 @@ export default function LessonModal({
   return (
     <Dialog open={!!lessonId} onOpenChange={(open) => !open && onClose()}>
       <DialogContent
-        className="max-w-2xl w-full p-0 overflow-hidden flex flex-col gap-0"
+        className="max-w-4xl w-full p-0 overflow-hidden flex flex-col gap-0"
         style={{
           background: 'rgba(10,13,26,0.97)',
           border: '1px solid rgba(245,200,66,0.18)',
           boxShadow: '0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(245,200,66,0.08)',
-          maxHeight: '88vh',
+          maxHeight: '90vh',
         }}
       >
         {/* ── Header ─────────────────────────────────────────── */}
@@ -191,6 +193,58 @@ export default function LessonModal({
                 >
                   <p className="text-xs font-bold uppercase tracking-widest text-yellow-500 mb-1">💡 Pro Tip</p>
                   <p className="text-sm text-slate-300">{lesson.tip}</p>
+                </div>
+              )}
+
+              {lesson.tasks && lesson.tasks.length > 0 && (
+                <div
+                  className="p-4 rounded-xl"
+                  style={{ background: 'rgba(39,174,96,0.06)', border: '1px solid rgba(39,174,96,0.2)' }}
+                >
+                  <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: '#2ecc71' }}>
+                    ✅ Your Tasks
+                  </p>
+                  <ul className="space-y-2">
+                    {lesson.tasks.map((task, i) => {
+                      const done = checkedTasks.has(i)
+                      return (
+                        <li key={i} className="flex items-start gap-3">
+                          <button
+                            onClick={() =>
+                              setCheckedTasks((prev) => {
+                                const next = new Set(prev)
+                                done ? next.delete(i) : next.add(i)
+                                return next
+                              })
+                            }
+                            className="mt-0.5 shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-150"
+                            style={{
+                              background: done ? '#27ae60' : 'transparent',
+                              borderColor: done ? '#27ae60' : 'rgba(39,174,96,0.5)',
+                            }}
+                            aria-label={done ? 'Mark incomplete' : 'Mark complete'}
+                          >
+                            {done && (
+                              <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                                <path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                              </svg>
+                            )}
+                          </button>
+                          <span
+                            className="text-sm leading-relaxed transition-all duration-150"
+                            style={{ color: done ? '#475569' : '#cbd5e1', textDecoration: done ? 'line-through' : 'none' }}
+                          >
+                            {task}
+                          </span>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                  {checkedTasks.size === lesson.tasks.length && (
+                    <p className="text-xs mt-3 font-bold" style={{ color: '#2ecc71' }}>
+                      🎉 All tasks complete!
+                    </p>
+                  )}
                 </div>
               )}
             </>

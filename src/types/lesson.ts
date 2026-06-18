@@ -6,4 +6,5 @@ export interface Lesson {
   content?: string
   tip?: string
   icon?: string // Custom Pedro Pascal icon path (e.g., 'pedro-01.png')
+  tasks?: string[]
 }
