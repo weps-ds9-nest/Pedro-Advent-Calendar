@@ -39,14 +39,14 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
       style={{
         // Flat tonal layering — no gradients, no box-shadows per DESIGN.md "Flat Layering Rule"
         background: isCompleted
-          ? 'rgba(39,174,96,0.12)'
+          ? 'color-mix(in srgb, var(--theme-success) 12%, transparent)'
           : isUnlocked
-          ? 'rgba(245,200,66,0.08)'
-          : '#111527',
+          ? 'color-mix(in srgb, var(--theme-primary) 8%, transparent)'
+          : 'var(--theme-surface)',
         border: isCompleted
-          ? '2px solid rgba(39,174,96,0.55)'
+          ? '2px solid color-mix(in srgb, var(--theme-success) 55%, transparent)'
           : isUnlocked
-          ? '2px solid rgba(245,200,66,0.5)'
+          ? '2px solid color-mix(in srgb, var(--theme-primary) 50%, transparent)'
           : '2px solid rgba(255,255,255,0.06)',
         borderRadius: '4px',
         opacity: !isUnlocked ? 0.65 : 1,
@@ -57,7 +57,11 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
         className="text-[9px] font-bold uppercase tracking-wider mb-1"
         style={{
           fontFamily: "'Press Start 2P', 'Courier New', monospace",
-          color: isCompleted ? '#2ecc71' : isUnlocked ? '#f5c842' : '#3a4060',
+          color: isCompleted
+            ? 'var(--theme-success-bright)'
+            : isUnlocked
+            ? 'var(--theme-primary)'
+            : 'var(--theme-border)',
         }}
       >
         W{String(lesson.day).padStart(2, '0')}
@@ -68,9 +72,9 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
         className="relative flex items-center justify-center w-10 h-10 my-1"
         style={{
           background: isCompleted
-            ? 'rgba(39,174,96,0.15)'
+            ? 'color-mix(in srgb, var(--theme-success) 15%, transparent)'
             : isUnlocked
-            ? 'rgba(245,200,66,0.12)'
+            ? 'color-mix(in srgb, var(--theme-primary) 12%, transparent)'
             : 'rgba(255,255,255,0.03)',
           borderRadius: '2px',
         }}
@@ -83,8 +87,12 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
         />
         {isCompleted && (
           <span
-            className="absolute -bottom-1 -right-1 flex items-center justify-center w-4 h-4 text-white border border-[#111527]"
-            style={{ background: '#27ae60', borderRadius: '2px' }}
+            className="absolute -bottom-1 -right-1 flex items-center justify-center w-4 h-4 text-white"
+            style={{
+              background: 'var(--theme-success)',
+              border: '1px solid var(--theme-surface)',
+              borderRadius: '2px',
+            }}
             aria-hidden="true"
           >
             <svg
@@ -101,7 +109,11 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
         {!isUnlocked && (
           <span
             className="absolute -top-1 -right-1 flex items-center justify-center w-4 h-4"
-            style={{ background: '#111527', borderRadius: '2px', border: '1px solid rgba(255,255,255,0.08)' }}
+            style={{
+              background: 'var(--theme-surface)',
+              borderRadius: '2px',
+              border: '1px solid rgba(255,255,255,0.08)',
+            }}
             aria-hidden="true"
           >
             <LockIcon />
@@ -115,9 +127,9 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
           className="text-[10px] text-center leading-tight mt-1 line-clamp-2"
           style={{
             color: isCompleted
-              ? 'rgba(46,204,113,0.8)'
+              ? 'color-mix(in srgb, var(--theme-success-bright) 80%, transparent)'
               : isUnlocked
-              ? 'rgba(245,200,66,0.75)'
+              ? 'color-mix(in srgb, var(--theme-primary) 75%, transparent)'
               : 'rgba(255,255,255,0.25)',
           }}
         >
@@ -139,7 +151,7 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
     <button
       type="button"
       onClick={onClick}
-      className="advent-door block w-full text-left bg-transparent border-0 p-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f5c842] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0d1a]"
+      className="advent-door block w-full text-left bg-transparent border-0 p-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--theme-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--theme-bg)]"
       aria-label={`Week ${lesson.day}${lesson.title ? ` — ${lesson.title}` : ''}${isCompleted ? ' (completed)' : ''}`}
     >
       {cardContent}
@@ -164,10 +176,10 @@ export default function CalendarGrid({ lessons, completedDays, role, errorDay, v
           role="alert"
           className="mb-6 px-4 py-3 text-sm flex items-center gap-2"
           style={{
-            background: 'rgba(192,57,43,0.12)',
-            border: '2px solid rgba(192,57,43,0.4)',
+            background: 'color-mix(in srgb, var(--theme-danger) 12%, transparent)',
+            border: '2px solid color-mix(in srgb, var(--theme-danger) 40%, transparent)',
             borderRadius: '4px',
-            color: '#e74c3c',
+            color: 'var(--theme-danger-bright)',
           }}
         >
           <span aria-hidden="true">🔒</span>
@@ -201,7 +213,11 @@ export default function CalendarGrid({ lessons, completedDays, role, errorDay, v
         <span className="flex items-center gap-2">
           <span
             className="inline-block w-3 h-3"
-            style={{ background: 'rgba(245,200,66,0.5)', border: '2px solid #f5c842', borderRadius: '2px' }}
+            style={{
+              background: 'color-mix(in srgb, var(--theme-primary) 50%, transparent)',
+              border: '2px solid var(--theme-primary)',
+              borderRadius: '2px',
+            }}
             aria-hidden="true"
           />
           Unlocked
@@ -209,7 +225,11 @@ export default function CalendarGrid({ lessons, completedDays, role, errorDay, v
         <span className="flex items-center gap-2">
           <span
             className="inline-block w-3 h-3"
-            style={{ background: 'rgba(39,174,96,0.4)', border: '2px solid #2ecc71', borderRadius: '2px' }}
+            style={{
+              background: 'color-mix(in srgb, var(--theme-success) 40%, transparent)',
+              border: '2px solid var(--theme-success-bright)',
+              borderRadius: '2px',
+            }}
             aria-hidden="true"
           />
           Completed
@@ -217,7 +237,11 @@ export default function CalendarGrid({ lessons, completedDays, role, errorDay, v
         <span className="flex items-center gap-2">
           <span
             className="inline-block w-3 h-3"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '2px solid rgba(255,255,255,0.06)', borderRadius: '2px' }}
+            style={{
+              background: 'rgba(255,255,255,0.04)',
+              border: '2px solid rgba(255,255,255,0.06)',
+              borderRadius: '2px',
+            }}
             aria-hidden="true"
           />
           Locked

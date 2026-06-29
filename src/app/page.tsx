@@ -46,10 +46,12 @@ export default async function DashboardPage({ searchParams }: PageProps) {
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-xs font-medium uppercase tracking-widest"
           style={{
             background: role === 'admin'
-              ? 'rgba(192,57,43,0.15)'
-              : 'rgba(245,200,66,0.1)',
-            border: `1px solid ${role === 'admin' ? 'rgba(192,57,43,0.35)' : 'rgba(245,200,66,0.3)'}`,
-            color: role === 'admin' ? '#e74c3c' : '#f5c842',
+              ? 'color-mix(in srgb, var(--theme-danger) 15%, transparent)'
+              : 'color-mix(in srgb, var(--theme-primary) 10%, transparent)',
+            border: `1px solid ${role === 'admin'
+              ? 'color-mix(in srgb, var(--theme-danger) 35%, transparent)'
+              : 'color-mix(in srgb, var(--theme-primary) 30%, transparent)'}`,
+            color: role === 'admin' ? 'var(--theme-danger-bright)' : 'var(--theme-primary)',
           }}
         >
           {viewAsStudent ? '👁 Pedro\'s View' : role === 'admin' ? '🔑 Admin View' : '🎓 Student'}

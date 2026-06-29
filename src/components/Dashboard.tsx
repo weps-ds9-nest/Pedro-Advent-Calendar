@@ -58,7 +58,7 @@ export default function Dashboard({ lessons, completedDays, role, errorDay, view
           <p
             className="text-xs uppercase tracking-widest font-bold"
             style={{
-              color: '#2ecc71',
+              color: 'var(--theme-success-bright)',
               fontFamily: "'Press Start 2P', 'Courier New', monospace",
               fontSize: '8px',
             }}
@@ -69,9 +69,9 @@ export default function Dashboard({ lessons, completedDays, role, errorDay, view
             onClick={() => setShowCompletionModal(true)}
             className="w-full px-6 py-3 rounded-xl font-semibold transition-all duration-200 hover:scale-105 active:scale-95"
             style={{
-              background: 'linear-gradient(135deg, #e0b020, #f5c842)',
-              color: '#060914',
-              boxShadow: '0 4px 20px rgba(224,176,32,0.3)',
+              background: 'linear-gradient(135deg, var(--theme-primary-dim), var(--theme-primary))',
+              color: 'var(--theme-canvas)',
+              boxShadow: '0 4px 20px color-mix(in srgb, var(--theme-primary-dim) 30%, transparent)',
               fontFamily: "'Press Start 2P', 'Courier New', monospace",
               fontSize: '9px',
               letterSpacing: '0.04em',
@@ -91,7 +91,7 @@ export default function Dashboard({ lessons, completedDays, role, errorDay, view
               className="h-2 rounded-full transition-all duration-700"
               style={{
                 width: `${(completedDays.length / TOTAL_LESSONS) * 100}%`,
-                background: 'linear-gradient(90deg, #e0b020, #f5c842, #2ecc71)',
+                background: 'linear-gradient(90deg, var(--theme-primary-dim), var(--theme-primary), var(--theme-success-bright))',
               }}
             />
           </div>

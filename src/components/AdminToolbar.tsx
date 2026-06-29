@@ -50,29 +50,51 @@ export default function AdminToolbar({ currentViewMode, initialCompletedCount }:
 
   const btnClass = (active: boolean) =>
     `px-2.5 py-0.5 rounded-md font-medium transition-all ${
-      active
-        ? 'bg-[rgba(245,200,66,0.15)] text-[#f5c842] border border-[rgba(245,200,66,0.3)]'
-        : 'text-slate-400 hover:text-slate-200 border border-transparent'
+      active ? '' : 'text-slate-400 hover:text-slate-200 border border-transparent'
     }`
+
+  const btnActiveStyle = {
+    background: 'color-mix(in srgb, var(--theme-primary) 15%, transparent)',
+    color: 'var(--theme-primary)',
+    border: '1px solid color-mix(in srgb, var(--theme-primary) 30%, transparent)',
+  }
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 h-10 bg-slate-950/85 backdrop-blur-md border-b border-[rgba(245,200,66,0.25)] z-[9999] flex items-center justify-between px-4 text-xs select-none"
-      style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.6)' }}
+      className="fixed top-0 left-0 right-0 h-10 bg-slate-950/85 backdrop-blur-md z-[9999] flex items-center justify-between px-4 text-xs select-none"
+      style={{
+        borderBottom: '1px solid color-mix(in srgb, var(--theme-primary) 25%, transparent)',
+        boxShadow: '0 2px 12px rgba(0,0,0,0.6)',
+      }}
     >
       <div className="flex items-center gap-3">
-        <span className="font-bold tracking-widest text-[#f5c842] uppercase text-[10px]">
+        <span
+          className="font-bold tracking-widest uppercase text-[10px]"
+          style={{ color: 'var(--theme-primary)' }}
+        >
           🛠 Admin Toolbar
         </span>
         <div className="h-3 w-px bg-slate-800" />
         <div className="flex items-center bg-slate-900 rounded-lg p-0.5 border border-slate-800">
-          <button onClick={() => setMode('admin')} className={btnClass(mode === 'admin')}>
+          <button
+            onClick={() => setMode('admin')}
+            className={btnClass(mode === 'admin')}
+            style={mode === 'admin' ? btnActiveStyle : undefined}
+          >
             Admin View
           </button>
-          <button onClick={() => setMode('student-real')} className={btnClass(mode === 'student-real')}>
+          <button
+            onClick={() => setMode('student-real')}
+            className={btnClass(mode === 'student-real')}
+            style={mode === 'student-real' ? btnActiveStyle : undefined}
+          >
             Pedro&apos;s View
           </button>
-          <button onClick={() => setMode('student-simulated')} className={btnClass(mode === 'student-simulated')}>
+          <button
+            onClick={() => setMode('student-simulated')}
+            className={btnClass(mode === 'student-simulated')}
+            style={mode === 'student-simulated' ? btnActiveStyle : undefined}
+          >
             Simulate
           </button>
         </div>
@@ -111,7 +133,11 @@ export default function AdminToolbar({ currentViewMode, initialCompletedCount }:
         <button
           onClick={handleApply}
           disabled={saving}
-          className="px-3 py-1 rounded-lg bg-[#f5c842] text-slate-950 font-bold hover:scale-105 active:scale-95 transition-all disabled:opacity-60"
+          className="px-3 py-1 rounded-lg font-bold hover:scale-105 active:scale-95 transition-all disabled:opacity-60"
+          style={{
+            background: 'var(--theme-primary)',
+            color: 'var(--theme-canvas)',
+          }}
         >
           {saving ? 'Applying...' : 'Apply'}
         </button>

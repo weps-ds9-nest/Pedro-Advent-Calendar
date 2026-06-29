@@ -35,7 +35,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className={cn("dark h-full", inter.variable, "font-sans", geist.variable)}>
       <body className={cn(
-        "min-h-full bg-[#0a0d1a] text-slate-100 antialiased font-sans",
+        "min-h-full bg-navy-900 text-slate-100 antialiased font-sans",
         showToolbar && "pt-10"
       )}>
         {showToolbar && (

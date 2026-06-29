@@ -4,6 +4,31 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ── Semantic theme tokens (holiday = default theme) ───────────────
+   Override these 12 variables to ship a new course theme.
+   Components must reference only --theme-* variables, never raw palette.
+   ─────────────────────────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --theme-canvas:         var(--color-navy-950);  /* deepest bg */
+  --theme-bg:             var(--color-navy-900);  /* page bg */
+  --theme-surface:        var(--color-navy-800);  /* card / panel */
+  --theme-border:         var(--color-navy-700);  /* dividers */
+
+  /* Primary accent (gold = holiday) */
+  --theme-primary:        var(--color-gold-400);  /* #f5c842 */
+  --theme-primary-dim:    var(--color-gold-500);  /* #e0b020 */
+  --theme-primary-pale:   var(--color-gold-300);  /* #fad86a */
+
+  /* Success / completed state (jade) */
+  --theme-success:        var(--color-jade-500);  /* #27ae60 */
+  --theme-success-bright: var(--color-jade-400);  /* #2ecc71 */
+
+  /* Danger / admin / error state (crimson) */
+  --theme-danger:         var(--color-crimson-500); /* #c0392b */
+  --theme-danger-bright:  var(--color-crimson-400); /* #e74c3c */
+}
+
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
@@ -37,12 +62,12 @@
 body {
   background-image: radial-gradient(
       ellipse at 20% 30%,
-      rgba(245, 200, 66, 0.04) 0%,
+      color-mix(in srgb, var(--theme-primary) 4%, transparent) 0%,
       transparent 50%
     ),
     radial-gradient(
       ellipse at 80% 70%,
-      rgba(39, 174, 96, 0.03) 0%,
+      color-mix(in srgb, var(--theme-success) 3%, transparent) 0%,
       transparent 50%
     );
 }
@@ -93,9 +118,9 @@ body {
 .gold-shimmer {
   background: linear-gradient(
     90deg,
-    var(--color-gold-500) 0%,
-    var(--color-gold-300) 50%,
-    var(--color-gold-500) 100%
+    var(--theme-primary-dim) 0%,
+    var(--theme-primary-pale) 50%,
+    var(--theme-primary-dim) 100%
   );
   background-size: 200% auto;
   animation: shimmer 3s linear infinite;

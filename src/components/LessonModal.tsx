@@ -84,9 +84,9 @@ export default function LessonModal({
       <DialogContent
         className="max-w-4xl w-full p-0 overflow-hidden flex flex-col gap-0"
         style={{
-          background: 'rgba(10,13,26,0.97)',
-          border: '1px solid rgba(245,200,66,0.18)',
-          boxShadow: '0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(245,200,66,0.08)',
+          background: 'color-mix(in srgb, var(--theme-canvas) 97%, transparent)',
+          border: '1px solid color-mix(in srgb, var(--theme-primary) 18%, transparent)',
+          boxShadow: '0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px color-mix(in srgb, var(--theme-primary) 8%, transparent)',
           maxHeight: '90vh',
         }}
       >
@@ -97,7 +97,8 @@ export default function LessonModal({
               <PedroIcon
                 day={lesson.day}
                 customIcon={lesson.icon}
-                className="w-9 h-9 rounded-full border border-[rgba(245,200,66,0.3)]"
+                className="w-9 h-9 rounded-full"
+                style={{ border: '1px solid color-mix(in srgb, var(--theme-primary) 30%, transparent)' }}
               />
             )}
             <div className="flex flex-col gap-1 min-w-0">
@@ -106,9 +107,9 @@ export default function LessonModal({
                   <span
                     className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full"
                     style={{
-                      background: 'rgba(245,200,66,0.12)',
-                      border: '1px solid rgba(245,200,66,0.35)',
-                      color: '#f5c842',
+                      background: 'color-mix(in srgb, var(--theme-primary) 12%, transparent)',
+                      border: '1px solid color-mix(in srgb, var(--theme-primary) 35%, transparent)',
+                      color: 'var(--theme-primary)',
                     }}
                   >
                     🎄 Week {lesson.day}
@@ -118,9 +119,9 @@ export default function LessonModal({
                   <span
                     className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full"
                     style={{
-                      background: 'rgba(192,57,43,0.12)',
-                      border: '1px solid rgba(192,57,43,0.35)',
-                      color: '#e74c3c',
+                      background: 'color-mix(in srgb, var(--theme-danger) 12%, transparent)',
+                      border: '1px solid color-mix(in srgb, var(--theme-danger) 35%, transparent)',
+                      color: 'var(--theme-danger-bright)',
                     }}
                   >
                     🔑 Admin
@@ -130,9 +131,9 @@ export default function LessonModal({
                   <span
                     className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full"
                     style={{
-                      background: 'rgba(39,174,96,0.12)',
-                      border: '1px solid rgba(39,174,96,0.35)',
-                      color: '#2ecc71',
+                      background: 'color-mix(in srgb, var(--theme-success) 12%, transparent)',
+                      border: '1px solid color-mix(in srgb, var(--theme-success) 35%, transparent)',
+                      color: 'var(--theme-success-bright)',
                     }}
                   >
                     ✅ Completed
@@ -158,7 +159,13 @@ export default function LessonModal({
         >
           {loading && (
             <div className="flex items-center justify-center h-40">
-              <div className="w-8 h-8 rounded-full border-2 border-[rgba(245,200,66,0.3)] border-t-[#f5c842] animate-spin" />
+              <div
+                className="w-8 h-8 rounded-full border-2 animate-spin"
+                style={{
+                  borderColor: 'color-mix(in srgb, var(--theme-primary) 30%, transparent)',
+                  borderTopColor: 'var(--theme-primary)',
+                }}
+              />
             </div>
           )}
 
@@ -168,7 +175,10 @@ export default function LessonModal({
                 <p className="text-slate-300 text-base leading-relaxed">{lesson.description}</p>
               )}
 
-              <div className="w-12 h-px rounded-full" style={{ background: 'linear-gradient(90deg, #f5c842, transparent)' }} />
+              <div
+                className="w-12 h-px rounded-full"
+                style={{ background: 'linear-gradient(90deg, var(--theme-primary), transparent)' }}
+              />
 
               {lesson.content ? (
                 <div
@@ -182,7 +192,10 @@ export default function LessonModal({
               {lesson.tip && (
                 <div
                   className="p-4 rounded-xl"
-                  style={{ background: 'rgba(245,200,66,0.07)', border: '1px solid rgba(245,200,66,0.2)' }}
+                  style={{
+                    background: 'color-mix(in srgb, var(--theme-primary) 7%, transparent)',
+                    border: '1px solid color-mix(in srgb, var(--theme-primary) 20%, transparent)',
+                  }}
                 >
                   <p className="text-xs font-bold uppercase tracking-widest text-yellow-500 mb-1">💡 Pro Tip</p>
                   <p className="text-sm text-slate-300">{lesson.tip}</p>
@@ -192,9 +205,15 @@ export default function LessonModal({
               {lesson.tasks && lesson.tasks.length > 0 && (
                 <div
                   className="p-4 rounded-xl"
-                  style={{ background: 'rgba(39,174,96,0.06)', border: '1px solid rgba(39,174,96,0.2)' }}
+                  style={{
+                    background: 'color-mix(in srgb, var(--theme-success) 6%, transparent)',
+                    border: '1px solid color-mix(in srgb, var(--theme-success) 20%, transparent)',
+                  }}
                 >
-                  <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: '#2ecc71' }}>
+                  <p
+                    className="text-xs font-bold uppercase tracking-widest mb-3"
+                    style={{ color: 'var(--theme-success-bright)' }}
+                  >
                     ✅ Your Tasks
                   </p>
                   <ul className="space-y-2">
@@ -212,8 +231,10 @@ export default function LessonModal({
                             }
                             className="mt-0.5 shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition-all duration-150"
                             style={{
-                              background: done ? '#27ae60' : 'transparent',
-                              borderColor: done ? '#27ae60' : 'rgba(39,174,96,0.5)',
+                              background: done ? 'var(--theme-success)' : 'transparent',
+                              borderColor: done
+                                ? 'var(--theme-success)'
+                                : 'color-mix(in srgb, var(--theme-success) 50%, transparent)',
                             }}
                             aria-label={done ? 'Mark incomplete' : 'Mark complete'}
                           >
@@ -234,7 +255,7 @@ export default function LessonModal({
                     })}
                   </ul>
                   {checkedTasks.size === lesson.tasks.length && (
-                    <p className="text-xs mt-3 font-bold" style={{ color: '#2ecc71' }}>
+                    <p className="text-xs mt-3 font-bold" style={{ color: 'var(--theme-success-bright)' }}>
                       🎉 All tasks complete!
                     </p>
                   )}
@@ -247,7 +268,10 @@ export default function LessonModal({
         {/* ── Footer Nav ──────────────────────────────────────── */}
         <DialogFooter
           className="shrink-0 px-6 py-4 flex-row items-center justify-between gap-3"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(17,21,39,0.6)' }}
+          style={{
+            borderTop: '1px solid rgba(255,255,255,0.06)',
+            background: 'color-mix(in srgb, var(--theme-surface) 60%, transparent)',
+          }}
         >
           {/* Prev */}
           <button
@@ -267,9 +291,9 @@ export default function LessonModal({
                   disabled
                   className="px-4 py-2 rounded-xl font-semibold text-sm tracking-wide"
                   style={{
-                    background: 'rgba(39,174,96,0.15)',
-                    border: '1px solid rgba(39,174,96,0.35)',
-                    color: 'rgba(46,204,113,0.5)',
+                    background: 'color-mix(in srgb, var(--theme-success) 15%, transparent)',
+                    border: '1px solid color-mix(in srgb, var(--theme-success) 35%, transparent)',
+                    color: 'color-mix(in srgb, var(--theme-success-bright) 50%, transparent)',
                     cursor: 'not-allowed',
                   }}
                 >
@@ -281,9 +305,9 @@ export default function LessonModal({
                   disabled={marking}
                   className="px-4 py-2 rounded-xl font-semibold text-sm tracking-wide transition-all duration-200 hover:scale-105 active:scale-95 disabled:opacity-60"
                   style={{
-                    background: 'linear-gradient(135deg, #2ecc71, #27ae60)',
+                    background: 'linear-gradient(135deg, var(--theme-success-bright), var(--theme-success))',
                     color: '#fff',
-                    boxShadow: '0 4px 16px rgba(39,174,96,0.3)',
+                    boxShadow: '0 4px 16px color-mix(in srgb, var(--theme-success) 30%, transparent)',
                   }}
                 >
                   {marking ? '…' : '✅ Mark Complete'}
@@ -299,9 +323,13 @@ export default function LessonModal({
             title={nextLocked ? 'Complete this lesson to unlock the next one' : undefined}
             className="px-3 py-2 rounded-xl text-sm font-medium transition-all disabled:opacity-30 disabled:cursor-not-allowed"
             style={{
-              background: canGoNext ? 'rgba(245,200,66,0.1)' : 'rgba(255,255,255,0.04)',
-              border: `1px solid ${canGoNext ? 'rgba(245,200,66,0.3)' : 'rgba(255,255,255,0.07)'}`,
-              color: canGoNext ? '#f5c842' : '#475569',
+              background: canGoNext
+                ? 'color-mix(in srgb, var(--theme-primary) 10%, transparent)'
+                : 'rgba(255,255,255,0.04)',
+              border: `1px solid ${canGoNext
+                ? 'color-mix(in srgb, var(--theme-primary) 30%, transparent)'
+                : 'rgba(255,255,255,0.07)'}`,
+              color: canGoNext ? 'var(--theme-primary)' : '#475569',
             }}
           >
             Week {lessonId && lessonId < totalLessons ? lessonId + 1 : ''} {nextLocked ? '🔒' : '→'}

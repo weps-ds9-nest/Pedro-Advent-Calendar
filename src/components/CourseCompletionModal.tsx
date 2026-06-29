@@ -8,6 +8,8 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 
+// Confetti colors are theme-specific celebration accents.
+// For a new theme, update this array to match the new palette.
 const CONFETTI_COLORS = ['#f5c842', '#27ae60', '#c0392b', '#ffffff', '#3498db', '#e0b020', '#2ecc71', '#e74c3c']
 
 function Confetti() {
@@ -69,9 +71,9 @@ export default function CourseCompletionModal({ open, onClose }: Props) {
         <DialogContent
           className="max-w-lg w-full p-0 overflow-hidden flex flex-col gap-0"
           style={{
-            background: 'rgba(10,13,26,0.98)',
-            border: '1px solid rgba(245,200,66,0.4)',
-            boxShadow: '0 24px 80px rgba(0,0,0,0.85), 0 0 0 1px rgba(245,200,66,0.1), 0 0 80px rgba(245,200,66,0.06)',
+            background: 'color-mix(in srgb, var(--theme-canvas) 98%, transparent)',
+            border: '1px solid color-mix(in srgb, var(--theme-primary) 40%, transparent)',
+            boxShadow: '0 24px 80px rgba(0,0,0,0.85), 0 0 0 1px color-mix(in srgb, var(--theme-primary) 10%, transparent), 0 0 80px color-mix(in srgb, var(--theme-primary) 6%, transparent)',
             zIndex: 300,
           }}
         >
@@ -104,7 +106,7 @@ export default function CourseCompletionModal({ open, onClose }: Props) {
 
             <div
               className="w-14 h-px rounded-full"
-              style={{ background: 'linear-gradient(90deg, #f5c842, transparent)' }}
+              style={{ background: 'linear-gradient(90deg, var(--theme-primary), transparent)' }}
             />
 
             <p className="text-slate-300 text-sm leading-relaxed">
@@ -119,15 +121,18 @@ export default function CourseCompletionModal({ open, onClose }: Props) {
           {/* Footer */}
           <div
             className="shrink-0 px-8 py-5 flex justify-center"
-            style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(17,21,39,0.6)' }}
+            style={{
+              borderTop: '1px solid rgba(255,255,255,0.06)',
+              background: 'color-mix(in srgb, var(--theme-surface) 60%, transparent)',
+            }}
           >
             <button
               onClick={onClose}
               className="px-8 py-2.5 rounded-xl font-semibold transition-all duration-200 hover:scale-105 active:scale-95"
               style={{
-                background: 'linear-gradient(135deg, #e0b020, #f5c842)',
-                color: '#060914',
-                boxShadow: '0 4px 16px rgba(224,176,32,0.35)',
+                background: 'linear-gradient(135deg, var(--theme-primary-dim), var(--theme-primary))',
+                color: 'var(--theme-canvas)',
+                boxShadow: '0 4px 16px color-mix(in srgb, var(--theme-primary-dim) 35%, transparent)',
                 fontFamily: "'Press Start 2P', 'Courier New', monospace",
                 fontSize: '9px',
                 letterSpacing: '0.05em',
