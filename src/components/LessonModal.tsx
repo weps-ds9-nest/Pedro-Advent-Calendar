@@ -104,38 +104,17 @@ export default function LessonModal({
             <div className="flex flex-col gap-1 min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
                 {lesson && (
-                  <span
-                    className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full"
-                    style={{
-                      background: 'color-mix(in srgb, var(--theme-primary) 12%, transparent)',
-                      border: '1px solid color-mix(in srgb, var(--theme-primary) 35%, transparent)',
-                      color: 'var(--theme-primary)',
-                    }}
-                  >
+                  <span className="chip chip-primary">
                     🎄 Week {lesson.day}
                   </span>
                 )}
                 {role === 'admin' && (
-                  <span
-                    className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full"
-                    style={{
-                      background: 'color-mix(in srgb, var(--theme-danger) 12%, transparent)',
-                      border: '1px solid color-mix(in srgb, var(--theme-danger) 35%, transparent)',
-                      color: 'var(--theme-danger-bright)',
-                    }}
-                  >
+                  <span className="chip chip-danger">
                     🔑 Admin
                   </span>
                 )}
                 {isCompleted && (
-                  <span
-                    className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full"
-                    style={{
-                      background: 'color-mix(in srgb, var(--theme-success) 12%, transparent)',
-                      border: '1px solid color-mix(in srgb, var(--theme-success) 35%, transparent)',
-                      color: 'var(--theme-success-bright)',
-                    }}
-                  >
+                  <span className="chip chip-success">
                     ✅ Completed
                   </span>
                 )}

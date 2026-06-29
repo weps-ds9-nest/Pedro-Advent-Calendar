@@ -27,10 +27,43 @@
   /* Danger / admin / error state (crimson) */
   --theme-danger:         var(--color-crimson-500); /* #c0392b */
   --theme-danger-bright:  var(--color-crimson-400); /* #e74c3c */
+
+  /* ── Typography ─────────────────────────────────────────────────── */
+  /* Families — reference @theme vars so a new theme can swap both at once */
+  --theme-font-body:    var(--font-sans);
+  --theme-font-display: var(--font-display);
+
+  /* Weights */
+  --theme-weight-regular:  400;
+  --theme-weight-semibold: 600;
+  --theme-weight-bold:     700;
+
+  /* Display (Press Start 2P) size scale */
+  --theme-text-display-xs: 8px;   /* Dashboard status label         */
+  --theme-text-display-sm: 9px;   /* card week labels, pixel buttons */
+  --theme-text-display-md: 14px;  /* modal title, completion heading */
+
+  /* Body (Inter) size scale */
+  --theme-text-label: 10px;  /* chip text, legend, toolbar label */
+  --theme-text-xs:    12px;  /* captions, footer, helper text    */
+  --theme-text-sm:    14px;  /* body copy, tips, task text       */
+  --theme-text-base:  16px;  /* primary body, modal descriptions */
+  --theme-text-2xl:   24px;  /* section subtitle                 */
+  --theme-text-5xl:   48px;  /* hero heading                     */
+
+  /* Letter spacing */
+  --theme-tracking-tight: -0.025em;  /* hero h1 */
+  --theme-tracking-label:  0.08em;   /* uppercase labels, chips */
+
+  /* Line heights */
+  --theme-leading-tight:   1.25;   /* card titles, headings */
+  --theme-leading-relaxed: 1.625;  /* body paragraphs */
+  --theme-leading-display: 1.8;    /* Press Start 2P — needs vertical room */
 }
 
 @theme {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Press Start 2P', 'Courier New', monospace;
 
   /* Advent Calendar Palette */
   --color-navy-950: #060914;
@@ -44,6 +77,89 @@
   --color-crimson-400: #e74c3c;
   --color-jade-500: #27ae60;
   --color-jade-400: #2ecc71;
+}
+
+/* ── Chip / badge pills ────────────────────────────────────────────── */
+/* Use .chip + one modifier (.chip-primary / .chip-success / .chip-danger)
+   instead of inline color-mix() styles on badge spans.
+   Figma equivalents: Theme/chip-primary, Theme/chip-success, Theme/chip-danger  */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid transparent;
+}
+.chip-primary {
+  background: color-mix(in srgb, var(--theme-primary) 12%, transparent);
+  border-color: color-mix(in srgb, var(--theme-primary) 35%, transparent);
+  color: var(--theme-primary);
+}
+.chip-success {
+  background: color-mix(in srgb, var(--theme-success) 12%, transparent);
+  border-color: color-mix(in srgb, var(--theme-success) 35%, transparent);
+  color: var(--theme-success-bright);
+}
+.chip-danger {
+  background: color-mix(in srgb, var(--theme-danger) 12%, transparent);
+  border-color: color-mix(in srgb, var(--theme-danger) 35%, transparent);
+  color: var(--theme-danger-bright);
+}
+
+/* ── Door card states ─────────────────────────────────────────────── */
+/* Replace inline color-mix() styles on the .advent-door-inner frame.
+   Figma equivalents: card-completed fill/stroke, card-unlocked fill/stroke */
+.card-completed {
+  background: color-mix(in srgb, var(--theme-success) 12%, transparent);
+  border: 2px solid color-mix(in srgb, var(--theme-success) 55%, transparent);
+  border-radius: 4px;
+}
+.card-unlocked {
+  background: color-mix(in srgb, var(--theme-primary) 8%, transparent);
+  border: 2px solid color-mix(in srgb, var(--theme-primary) 50%, transparent);
+  border-radius: 4px;
+}
+.card-locked {
+  background: var(--theme-surface);
+  border: 2px solid rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  opacity: 0.65;
+}
+
+/* ── Typography utilities ─────────────────────────────────────────── */
+/* Compose these classes to apply the theme's type scale.
+   Figma equivalents: typography/* variables + named text styles.     */
+
+/* Display / pixel font (Press Start 2P) — base + size modifiers */
+.text-display {
+  font-family: var(--theme-font-display);
+  line-height: var(--theme-leading-display);
+}
+.text-display-xs { font-size: var(--theme-text-display-xs); }
+.text-display-sm { font-size: var(--theme-text-display-sm); }
+.text-display-md { font-size: var(--theme-text-display-md); }
+
+/* Body uppercase label — Inter, bold, tight tracking */
+.text-label {
+  font-family: var(--theme-font-body);
+  font-size: var(--theme-text-label);
+  font-weight: var(--theme-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--theme-tracking-label);
+  line-height: var(--theme-leading-tight);
+}
+
+/* Display uppercase label — pixel font version of .text-label */
+.text-display-label {
+  font-family: var(--theme-font-display);
+  font-size: var(--theme-text-display-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--theme-tracking-label);
+  line-height: var(--theme-leading-display);
 }
 
 /* ── Scrollbar ─────────────────────────────────────────────────────── */

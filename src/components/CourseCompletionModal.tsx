@@ -83,23 +83,13 @@ export default function CourseCompletionModal({ open, onClose }: Props) {
             style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}
           >
             <div className="text-5xl mb-5 select-none" aria-hidden>🏆</div>
-            <DialogTitle
-              className="gold-shimmer text-center"
-              style={{
-                fontFamily: "'Press Start 2P', 'Courier New', monospace",
-                fontSize: '0.85rem',
-                lineHeight: '1.8',
-              }}
-            >
+            <DialogTitle className="gold-shimmer text-center text-display text-display-md">
               San Pedro Bestows<br />Your Blessing
             </DialogTitle>
           </DialogHeader>
 
           {/* Body */}
-          <div
-            className="px-8 py-7 space-y-5"
-            style={{ fontFamily: 'Inter, ui-sans-serif, system-ui', maxWidth: '70ch' }}
-          >
+          <div className="px-8 py-7 space-y-5" style={{ maxWidth: '70ch' }}>
             <p className="text-slate-200 text-base leading-relaxed">
               You have walked the full path — all 24 weeks of the Claude Code curriculum. San Pedro, eternal guardian of the digital threshold, recognises your dedication and grants you his blessing.
             </p>
@@ -128,14 +118,11 @@ export default function CourseCompletionModal({ open, onClose }: Props) {
           >
             <button
               onClick={onClose}
-              className="px-8 py-2.5 rounded-xl font-semibold transition-all duration-200 hover:scale-105 active:scale-95"
+              className="text-display text-display-sm px-8 py-2.5 rounded-xl transition-all duration-200 hover:scale-105 active:scale-95"
               style={{
                 background: 'linear-gradient(135deg, var(--theme-primary-dim), var(--theme-primary))',
                 color: 'var(--theme-canvas)',
                 boxShadow: '0 4px 16px color-mix(in srgb, var(--theme-primary-dim) 35%, transparent)',
-                fontFamily: "'Press Start 2P', 'Courier New', monospace",
-                fontSize: '9px',
-                letterSpacing: '0.05em',
               }}
             >
               ✨ Close

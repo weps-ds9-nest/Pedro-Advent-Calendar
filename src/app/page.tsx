@@ -43,17 +43,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
     <main className="min-h-screen px-4 py-12 max-w-5xl mx-auto relative z-10">
       {/* Header */}
       <header className="text-center mb-12">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-xs font-medium uppercase tracking-widest"
-          style={{
-            background: role === 'admin'
-              ? 'color-mix(in srgb, var(--theme-danger) 15%, transparent)'
-              : 'color-mix(in srgb, var(--theme-primary) 10%, transparent)',
-            border: `1px solid ${role === 'admin'
-              ? 'color-mix(in srgb, var(--theme-danger) 35%, transparent)'
-              : 'color-mix(in srgb, var(--theme-primary) 30%, transparent)'}`,
-            color: role === 'admin' ? 'var(--theme-danger-bright)' : 'var(--theme-primary)',
-          }}
-        >
+        <div className={`chip mb-6 ${role === 'admin' ? 'chip-danger' : 'chip-primary'}`}>
           {viewAsStudent ? '👁 Pedro\'s View' : role === 'admin' ? '🔑 Admin View' : '🎓 Student'}
         </div>
 

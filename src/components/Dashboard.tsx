@@ -56,25 +56,18 @@ export default function Dashboard({ lessons, completedDays, role, errorDay, view
       {courseComplete ? (
         <div className="text-center mb-8 max-w-sm mx-auto space-y-3">
           <p
-            className="text-xs uppercase tracking-widest font-bold"
-            style={{
-              color: 'var(--theme-success-bright)',
-              fontFamily: "'Press Start 2P', 'Courier New', monospace",
-              fontSize: '8px',
-            }}
+            className="text-display text-display-xs uppercase tracking-widest"
+            style={{ color: 'var(--theme-success-bright)' }}
           >
             ✅ Course completed
           </p>
           <button
             onClick={() => setShowCompletionModal(true)}
-            className="w-full px-6 py-3 rounded-xl font-semibold transition-all duration-200 hover:scale-105 active:scale-95"
+            className="text-display text-display-sm w-full px-6 py-3 rounded-xl transition-all duration-200 hover:scale-105 active:scale-95"
             style={{
               background: 'linear-gradient(135deg, var(--theme-primary-dim), var(--theme-primary))',
               color: 'var(--theme-canvas)',
               boxShadow: '0 4px 20px color-mix(in srgb, var(--theme-primary-dim) 30%, transparent)',
-              fontFamily: "'Press Start 2P', 'Courier New', monospace",
-              fontSize: '9px',
-              letterSpacing: '0.04em',
             }}
           >
             ✨ Review your blessing

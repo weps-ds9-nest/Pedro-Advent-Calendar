@@ -35,28 +35,14 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
 }) {
   const cardContent = (
     <div
-      className="advent-door-inner relative flex flex-col items-center justify-center p-4 h-28 select-none"
-      style={{
-        // Flat tonal layering — no gradients, no box-shadows per DESIGN.md "Flat Layering Rule"
-        background: isCompleted
-          ? 'color-mix(in srgb, var(--theme-success) 12%, transparent)'
-          : isUnlocked
-          ? 'color-mix(in srgb, var(--theme-primary) 8%, transparent)'
-          : 'var(--theme-surface)',
-        border: isCompleted
-          ? '2px solid color-mix(in srgb, var(--theme-success) 55%, transparent)'
-          : isUnlocked
-          ? '2px solid color-mix(in srgb, var(--theme-primary) 50%, transparent)'
-          : '2px solid rgba(255,255,255,0.06)',
-        borderRadius: '4px',
-        opacity: !isUnlocked ? 0.65 : 1,
-      }}
+      className={`advent-door-inner relative flex flex-col items-center justify-center p-4 h-28 select-none ${
+        isCompleted ? 'card-completed' : isUnlocked ? 'card-unlocked' : 'card-locked'
+      }`}
     >
       {/* Week label — short monospace label per DESIGN.md Typography rules */}
       <span
-        className="text-[9px] font-bold uppercase tracking-wider mb-1"
+        className="text-display text-display-sm uppercase tracking-wider mb-1"
         style={{
-          fontFamily: "'Press Start 2P', 'Courier New', monospace",
           color: isCompleted
             ? 'var(--theme-success-bright)'
             : isUnlocked
