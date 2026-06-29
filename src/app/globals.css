@@ -131,6 +131,28 @@ body {
   z-index: 0;
 }
 
+/* ── Confetti ──────────────────────────────────────────────────────── */
+@keyframes confetti-fall {
+  0%   { transform: translateY(0) rotate(0deg);    opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes confetti-sway {
+  0%   { margin-left:  0px; }
+  25%  { margin-left:  28px; }
+  75%  { margin-left: -28px; }
+  100% { margin-left:  0px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .confetti-particle {
+    animation: none !important;
+    display: none;
+  }
+}
+
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);

@@ -22,11 +22,24 @@ export async function middleware(request: NextRequest) {
   if (process.env.DEV_MODE === 'true') {
     const requestHeaders = new Headers(request.headers)
     const devRole = request.cookies.get('dev_role')?.value ?? 'admin'
-    const activeRole = (devRole === 'user' || devRole === 'student') ? 'user' : 'admin'
-    
+
+    let activeRole: string
+    let viewMode: string
+    if (devRole === 'user' || devRole === 'student') {
+      activeRole = 'user'
+      viewMode = 'student-simulated'
+    } else if (devRole === 'student-real') {
+      activeRole = 'admin'
+      viewMode = 'student-real'
+    } else {
+      activeRole = 'admin'
+      viewMode = 'admin'
+    }
+
     requestHeaders.set('x-actual-role', 'admin')
     requestHeaders.set('x-user-role', activeRole)
-    
+    requestHeaders.set('x-view-mode', viewMode)
+
     return NextResponse.next({
       request: {
         headers: requestHeaders,
@@ -49,13 +62,19 @@ export async function middleware(request: NextRequest) {
   requestHeaders.set('x-actual-role', role)
 
   let activeRole = role
+  let viewMode = role === 'admin' ? 'admin' : 'student'
   if (role === 'admin') {
     const devRole = request.cookies.get('dev_role')?.value
     if (devRole === 'user' || devRole === 'student') {
       activeRole = 'user'
+      viewMode = 'student-simulated'
+    } else if (devRole === 'student-real') {
+      activeRole = 'admin'
+      viewMode = 'student-real'
     }
   }
   requestHeaders.set('x-user-role', activeRole)
+  requestHeaders.set('x-view-mode', viewMode)
 
   return NextResponse.next({
     request: {

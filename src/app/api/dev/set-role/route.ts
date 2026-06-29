@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { role, completedCount } = body
 
-    if (!role || (role !== 'admin' && role !== 'student' && role !== 'user')) {
+    if (!role || !['admin', 'student', 'user', 'student-real'].includes(role)) {
       return NextResponse.json({ error: 'Invalid role' }, { status: 400 })
     }
 

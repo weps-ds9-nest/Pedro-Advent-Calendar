@@ -162,14 +162,7 @@ export default function LessonModal({
             </div>
           )}
 
-          {!loading && lesson && !lesson.published && (
-            <div className="flex flex-col items-center justify-center h-40 text-center gap-3">
-              <span className="text-5xl">🚧</span>
-              <p className="text-slate-400">Content for Week {lessonId} hasn&apos;t been published yet.</p>
-            </div>
-          )}
-
-          {!loading && lesson && lesson.published && (
+          {!loading && lesson && (
             <>
               {lesson.description && (
                 <p className="text-slate-300 text-base leading-relaxed">{lesson.description}</p>
@@ -267,20 +260,35 @@ export default function LessonModal({
           </button>
 
           <div className="flex items-center gap-2">
-            {/* Mark complete (students only, not already done) */}
-            {role !== 'admin' && !isCompleted && (
-              <button
-                onClick={handleMarkComplete}
-                disabled={marking}
-                className="px-4 py-2 rounded-xl font-semibold text-sm tracking-wide transition-all duration-200 hover:scale-105 active:scale-95 disabled:opacity-60"
-                style={{
-                  background: 'linear-gradient(135deg, #2ecc71, #27ae60)',
-                  color: '#fff',
-                  boxShadow: '0 4px 16px rgba(39,174,96,0.3)',
-                }}
-              >
-                {marking ? '…' : '✅ Mark Complete'}
-              </button>
+            {/* Mark complete — admin only */}
+            {role === 'admin' && (
+              isCompleted ? (
+                <button
+                  disabled
+                  className="px-4 py-2 rounded-xl font-semibold text-sm tracking-wide"
+                  style={{
+                    background: 'rgba(39,174,96,0.15)',
+                    border: '1px solid rgba(39,174,96,0.35)',
+                    color: 'rgba(46,204,113,0.5)',
+                    cursor: 'not-allowed',
+                  }}
+                >
+                  ✅ Completed
+                </button>
+              ) : (
+                <button
+                  onClick={handleMarkComplete}
+                  disabled={marking}
+                  className="px-4 py-2 rounded-xl font-semibold text-sm tracking-wide transition-all duration-200 hover:scale-105 active:scale-95 disabled:opacity-60"
+                  style={{
+                    background: 'linear-gradient(135deg, #2ecc71, #27ae60)',
+                    color: '#fff',
+                    boxShadow: '0 4px 16px rgba(39,174,96,0.3)',
+                  }}
+                >
+                  {marking ? '…' : '✅ Mark Complete'}
+                </button>
+              )
             )}
           </div>
 

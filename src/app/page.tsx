@@ -14,6 +14,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
   const headerStore = await headers()
   const role = headerStore.get('x-user-role') ?? 'user'
   const actualRole = headerStore.get('x-actual-role')
+  const viewMode = headerStore.get('x-view-mode') ?? 'admin'
 
   // Validate cookie is still present (double-check, middleware handles redirects)
   const cookieStore = await cookies()
@@ -22,8 +23,12 @@ export default async function DashboardPage({ searchParams }: PageProps) {
   }
 
   // Determine target role for progress tracking
-  const targetRole = (actualRole === 'admin' && role === 'user') ? 'simulated' : role
+  const targetRole =
+    actualRole === 'admin' && role === 'user' ? 'simulated' :
+    viewMode === 'student-real'               ? 'user'      :
+    role
   const completedIds = await getProgress(targetRole)
+  const viewAsStudent = viewMode === 'student-real'
   const params = await searchParams
 
   // Parse error day from a richer error param like "locked-3"
@@ -47,7 +52,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
             color: role === 'admin' ? '#e74c3c' : '#f5c842',
           }}
         >
-          {role === 'admin' ? '🔑 Admin View' : '🎓 Student'}
+          {viewAsStudent ? '👁 Pedro\'s View' : role === 'admin' ? '🔑 Admin View' : '🎓 Student'}
         </div>
 
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-3">
@@ -60,24 +65,6 @@ export default async function DashboardPage({ searchParams }: PageProps) {
           Complete each week sequentially to unlock the next lesson.
         </p>
 
-        {/* Progress bar (user only) */}
-        {role !== 'admin' && (
-          <div className="mt-6 max-w-sm mx-auto">
-            <div className="flex justify-between text-xs text-slate-500 mb-1.5">
-              <span>Progress</span>
-              <span>{completedIds.length} / 24 weeks</span>
-            </div>
-            <div className="w-full rounded-full h-2 overflow-hidden" style={{ background: 'rgba(255,255,255,0.08)' }}>
-              <div
-                className="h-2 rounded-full transition-all duration-700"
-                style={{
-                  width: `${(completedIds.length / 24) * 100}%`,
-                  background: 'linear-gradient(90deg, #e0b020, #f5c842, #2ecc71)',
-                }}
-              />
-            </div>
-          </div>
-        )}
       </header>
 
       {/* Dashboard container with Grid + Modal */}
@@ -86,6 +73,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
         completedDays={completedIds}
         role={role}
         errorDay={errorDayNum}
+        viewAsStudent={viewAsStudent}
       />
 
       {/* Footer */}

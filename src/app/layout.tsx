@@ -27,7 +27,7 @@ export default async function RootLayout({
 }>) {
   const headerStore = await headers()
   const actualRole = headerStore.get('x-actual-role')
-  const userRole = headerStore.get('x-user-role') ?? 'user'
+  const viewMode = headerStore.get('x-view-mode') ?? 'admin'
 
   const showToolbar = actualRole === 'admin'
   const completedSimulated = showToolbar ? await getProgress('simulated') : []
@@ -40,7 +40,7 @@ export default async function RootLayout({
       )}>
         {showToolbar && (
           <AdminToolbar
-            currentRole={userRole === 'admin' ? 'admin' : 'student'}
+            currentViewMode={viewMode}
             initialCompletedCount={completedSimulated.length}
           />
         )}

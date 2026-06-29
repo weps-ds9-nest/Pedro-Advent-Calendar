@@ -8,20 +8,21 @@ interface Props {
   completedDays: number[]
   role: string
   errorDay?: number | null
+  viewAsStudent?: boolean
   onLessonClick?: (id: number) => void
 }
 
 function LockIcon() {
   return (
     <svg
-      className="w-5 h-5 text-slate-700"
+      className="w-2.5 h-2.5 text-slate-500"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
       aria-hidden="true"
     >
-      <rect x="5" y="11" width="14" height="10" rx="1" strokeWidth="2" />
-      <path d="M8 11V7a4 4 0 0 1 8 0v4" strokeWidth="2" />
+      <rect x="5" y="11" width="14" height="10" rx="1" strokeWidth="2.5" />
+      <path d="M8 11V7a4 4 0 0 1 8 0v4" strokeWidth="2.5" />
     </svg>
   )
 }
@@ -48,7 +49,7 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
           ? '2px solid rgba(245,200,66,0.5)'
           : '2px solid rgba(255,255,255,0.06)',
         borderRadius: '4px',
-        opacity: !isUnlocked ? 0.5 : 1,
+        opacity: !isUnlocked ? 0.65 : 1,
       }}
     >
       {/* Week label — short monospace label per DESIGN.md Typography rules */}
@@ -74,42 +75,51 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
           borderRadius: '2px',
         }}
       >
-        {isUnlocked ? (
-          <>
-            <PedroIcon
-              day={lesson.day}
-              customIcon={lesson.icon}
-              className="w-9 h-9 object-cover"
-              style={{ borderRadius: '2px' }}
-            />
-            {isCompleted && (
-              <span
-                className="absolute -bottom-1 -right-1 flex items-center justify-center w-4 h-4 text-white border border-[#111527]"
-                style={{ background: '#27ae60', borderRadius: '2px' }}
-                aria-hidden="true"
-              >
-                <svg
-                  className="w-2.5 h-2.5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                </svg>
-              </span>
-            )}
-          </>
-        ) : (
-          <LockIcon />
+        <PedroIcon
+          day={lesson.day}
+          customIcon={lesson.icon}
+          className="w-9 h-9 object-cover"
+          style={{ borderRadius: '2px' }}
+        />
+        {isCompleted && (
+          <span
+            className="absolute -bottom-1 -right-1 flex items-center justify-center w-4 h-4 text-white border border-[#111527]"
+            style={{ background: '#27ae60', borderRadius: '2px' }}
+            aria-hidden="true"
+          >
+            <svg
+              className="w-2.5 h-2.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+            </svg>
+          </span>
+        )}
+        {!isUnlocked && (
+          <span
+            className="absolute -top-1 -right-1 flex items-center justify-center w-4 h-4"
+            style={{ background: '#111527', borderRadius: '2px', border: '1px solid rgba(255,255,255,0.08)' }}
+            aria-hidden="true"
+          >
+            <LockIcon />
+          </span>
         )}
       </div>
 
-      {/* Title — sans-serif body per Typography rules, visible on unlocked only */}
-      {isUnlocked && lesson.title && (
+      {/* Title — always visible, color reflects lock/complete state */}
+      {lesson.title && (
         <p
           className="text-[10px] text-center leading-tight mt-1 line-clamp-2"
-          style={{ color: isCompleted ? 'rgba(46,204,113,0.8)' : 'rgba(245,200,66,0.75)' }}
+          style={{
+            color: isCompleted
+              ? 'rgba(46,204,113,0.8)'
+              : isUnlocked
+              ? 'rgba(245,200,66,0.75)'
+              : 'rgba(255,255,255,0.25)',
+          }}
         >
           {lesson.title}
         </p>
@@ -137,7 +147,7 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
   )
 }
 
-export default function CalendarGrid({ lessons, completedDays, role, errorDay, onLessonClick }: Props) {
+export default function CalendarGrid({ lessons, completedDays, role, errorDay, viewAsStudent, onLessonClick }: Props) {
   const days = Array.from({ length: 24 }, (_, i) => {
     const dayNum = i + 1
     return lessons.find((l) => l.day === dayNum) ?? {
@@ -171,7 +181,7 @@ export default function CalendarGrid({ lessons, completedDays, role, errorDay, o
         {days.map((lesson) => {
           const isCompleted = completedDays.includes(lesson.day)
           const isUnlocked =
-            role === 'admin' ||
+            (role === 'admin' && !viewAsStudent) ||
             lesson.day === 1 ||
             completedDays.includes(lesson.day - 1)
           return (

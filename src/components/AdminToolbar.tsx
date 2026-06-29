@@ -3,13 +3,21 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
+type ViewMode = 'admin' | 'student-real' | 'student-simulated'
+
 interface Props {
-  currentRole: 'admin' | 'student'
+  currentViewMode: string
   initialCompletedCount: number
 }
 
-export default function AdminToolbar({ currentRole, initialCompletedCount }: Props) {
-  const [role, setRole] = useState<'admin' | 'student'>(currentRole)
+function modeToViewMode(m: string): ViewMode {
+  if (m === 'student-real') return 'student-real'
+  if (m === 'student-simulated') return 'student-simulated'
+  return 'admin'
+}
+
+export default function AdminToolbar({ currentViewMode, initialCompletedCount }: Props) {
+  const [mode, setMode] = useState<ViewMode>(modeToViewMode(currentViewMode))
   const [completedCount, setCompletedCount] = useState<number>(initialCompletedCount)
   const [saving, setSaving] = useState(false)
   const router = useRouter()
@@ -17,12 +25,17 @@ export default function AdminToolbar({ currentRole, initialCompletedCount }: Pro
   async function handleApply() {
     setSaving(true)
     try {
+      const apiRole =
+        mode === 'student-real'       ? 'student-real' :
+        mode === 'student-simulated'  ? 'student'      :
+        'admin'
+
       const res = await fetch('/api/dev/set-role', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          role,
-          completedCount: role === 'student' ? completedCount : undefined,
+          role: apiRole,
+          completedCount: mode === 'student-simulated' ? completedCount : undefined,
         }),
       })
       if (res.ok) {
@@ -35,12 +48,17 @@ export default function AdminToolbar({ currentRole, initialCompletedCount }: Pro
     }
   }
 
+  const btnClass = (active: boolean) =>
+    `px-2.5 py-0.5 rounded-md font-medium transition-all ${
+      active
+        ? 'bg-[rgba(245,200,66,0.15)] text-[#f5c842] border border-[rgba(245,200,66,0.3)]'
+        : 'text-slate-400 hover:text-slate-200 border border-transparent'
+    }`
+
   return (
     <div
       className="fixed top-0 left-0 right-0 h-10 bg-slate-950/85 backdrop-blur-md border-b border-[rgba(245,200,66,0.25)] z-[9999] flex items-center justify-between px-4 text-xs select-none"
-      style={{
-        boxShadow: '0 2px 12px rgba(0,0,0,0.6)',
-      }}
+      style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.6)' }}
     >
       <div className="flex items-center gap-3">
         <span className="font-bold tracking-widest text-[#f5c842] uppercase text-[10px]">
@@ -48,31 +66,20 @@ export default function AdminToolbar({ currentRole, initialCompletedCount }: Pro
         </span>
         <div className="h-3 w-px bg-slate-800" />
         <div className="flex items-center bg-slate-900 rounded-lg p-0.5 border border-slate-800">
-          <button
-            onClick={() => setRole('admin')}
-            className={`px-2.5 py-0.5 rounded-md font-medium transition-all ${
-              role === 'admin'
-                ? 'bg-[rgba(245,200,66,0.15)] text-[#f5c842] border border-[rgba(245,200,66,0.3)]'
-                : 'text-slate-400 hover:text-slate-200 border border-transparent'
-            }`}
-          >
+          <button onClick={() => setMode('admin')} className={btnClass(mode === 'admin')}>
             Admin View
           </button>
-          <button
-            onClick={() => setRole('student')}
-            className={`px-2.5 py-0.5 rounded-md font-medium transition-all ${
-              role === 'student'
-                ? 'bg-[rgba(245,200,66,0.15)] text-[#f5c842] border border-[rgba(245,200,66,0.3)]'
-                : 'text-slate-400 hover:text-slate-200 border border-transparent'
-            }`}
-          >
-            Student View
+          <button onClick={() => setMode('student-real')} className={btnClass(mode === 'student-real')}>
+            Pedro&apos;s View
+          </button>
+          <button onClick={() => setMode('student-simulated')} className={btnClass(mode === 'student-simulated')}>
+            Simulate
           </button>
         </div>
       </div>
 
       <div className="flex items-center gap-4">
-        {role === 'student' && (
+        {mode === 'student-simulated' && (
           <div className="flex items-center gap-2">
             <span className="text-slate-400">Simulate completed:</span>
             <div className="flex items-center gap-1">
@@ -95,6 +102,10 @@ export default function AdminToolbar({ currentRole, initialCompletedCount }: Pro
               </button>
             </div>
           </div>
+        )}
+
+        {mode === 'student-real' && (
+          <span className="text-slate-500 italic">Showing Pedro&apos;s real progress</span>
         )}
 
         <button

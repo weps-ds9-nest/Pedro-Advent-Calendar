@@ -5,6 +5,12 @@ import { redirect } from 'next/navigation'
 import { createSession } from '@/lib/session'
 import { markComplete } from '@/lib/kv'
 
+function resolveTargetRole(role: string, actualRole: string | null): string {
+  if (actualRole === 'admin' && role === 'user') return 'simulated'
+  if (role === 'admin') return 'user'
+  return role
+}
+
 // ── Login ──────────────────────────────────────────────────────────────────
 
 export async function loginAction(
@@ -55,8 +61,7 @@ export async function markCompleteAction(id: number) {
   const role = headerStore.get('x-user-role') ?? 'user'
   const actualRole = headerStore.get('x-actual-role')
 
-  const targetRole = (actualRole === 'admin' && role === 'user') ? 'simulated' : role
-  await markComplete(targetRole, id)
+  await markComplete(resolveTargetRole(role, actualRole), id)
 
   const nextId = id + 1
   redirect(nextId <= 24 ? `/lesson/${nextId}` : '/')
@@ -70,6 +75,5 @@ export async function markCompleteNoRedirect(id: number) {
   const role = headerStore.get('x-user-role') ?? 'user'
   const actualRole = headerStore.get('x-actual-role')
 
-  const targetRole = (actualRole === 'admin' && role === 'user') ? 'simulated' : role
-  await markComplete(targetRole, id)
+  await markComplete(resolveTargetRole(role, actualRole), id)
 }
