@@ -50,7 +50,7 @@ export default function AdminToolbar({ currentViewMode, initialCompletedCount }:
 
   const btnClass = (active: boolean) =>
     `px-2.5 py-0.5 rounded-md font-medium transition-all ${
-      active ? '' : 'text-slate-400 hover:text-slate-200 border border-transparent'
+      active ? '' : 'toolbar-btn-inactive border border-transparent'
     }`
 
   const btnActiveStyle = {
@@ -103,22 +103,24 @@ export default function AdminToolbar({ currentViewMode, initialCompletedCount }:
       <div className="flex items-center gap-4">
         {mode === 'student-simulated' && (
           <div className="flex items-center gap-2">
-            <span className="text-slate-400">Simulate completed:</span>
+            <span style={{ color: 'var(--theme-text-muted)' }}>Simulate completed:</span>
             <div className="flex items-center gap-1">
               <button
                 disabled={completedCount <= 0}
                 onClick={() => setCompletedCount((prev) => Math.max(0, prev - 1))}
-                className="w-5 h-5 rounded bg-slate-900 border border-slate-800 text-slate-300 hover:bg-slate-850 flex items-center justify-center font-bold active:scale-90 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                className="w-5 h-5 rounded bg-slate-900 border border-slate-800 flex items-center justify-center font-bold active:scale-90 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+              style={{ color: 'var(--theme-text-body)' }}
               >
                 -
               </button>
-              <span className="w-14 text-center font-semibold text-slate-100">
+              <span className="w-14 text-center font-semibold" style={{ color: 'var(--theme-text-primary)' }}>
                 {completedCount} {completedCount === 1 ? 'wk' : 'wks'}
               </span>
               <button
                 disabled={completedCount >= 24}
                 onClick={() => setCompletedCount((prev) => Math.min(24, prev + 1))}
-                className="w-5 h-5 rounded bg-slate-900 border border-slate-800 text-slate-300 hover:bg-slate-850 flex items-center justify-center font-bold active:scale-90 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                className="w-5 h-5 rounded bg-slate-900 border border-slate-800 flex items-center justify-center font-bold active:scale-90 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                style={{ color: 'var(--theme-text-body)' }}
               >
                 +
               </button>
@@ -127,7 +129,7 @@ export default function AdminToolbar({ currentViewMode, initialCompletedCount }:
         )}
 
         {mode === 'student-real' && (
-          <span className="text-slate-500 italic">Showing Pedro&apos;s real progress</span>
+          <span className="italic" style={{ color: 'var(--theme-text-faint)' }}>Showing Pedro&apos;s real progress</span>
         )}
 
         <button

@@ -119,9 +119,9 @@ export default function LessonModal({
                   </span>
                 )}
               </div>
-              <DialogTitle className="text-base font-bold text-slate-100 leading-snug truncate">
+              <DialogTitle className="text-base font-bold leading-snug truncate" style={{ color: 'var(--theme-text-primary)' }}>
                 {loading ? (
-                  <span className="text-slate-500">Loading…</span>
+                  <span style={{ color: 'var(--theme-text-faint)' }}>Loading…</span>
                 ) : (
                   lesson?.title || `Week ${lessonId}`
                 )}
@@ -151,7 +151,7 @@ export default function LessonModal({
           {!loading && lesson && (
             <>
               {lesson.description && (
-                <p className="text-slate-300 text-base leading-relaxed">{lesson.description}</p>
+                <p className="text-base leading-relaxed" style={{ color: 'var(--theme-text-body)' }}>{lesson.description}</p>
               )}
 
               <div
@@ -161,11 +161,12 @@ export default function LessonModal({
 
               {lesson.content ? (
                 <div
-                  className="prose prose-invert prose-slate max-w-none text-slate-300 leading-relaxed space-y-3 text-sm"
+                  className="prose prose-invert prose-slate max-w-none leading-relaxed space-y-3 text-sm"
+                  style={{ color: 'var(--theme-text-body)' }}
                   dangerouslySetInnerHTML={{ __html: lesson.content }}
                 />
               ) : (
-                <p className="text-slate-500 italic text-sm">Lesson content coming soon…</p>
+                <p className="italic text-sm" style={{ color: 'var(--theme-text-faint)' }}>Lesson content coming soon…</p>
               )}
 
               {lesson.tip && (
@@ -176,8 +177,8 @@ export default function LessonModal({
                     border: '1px solid color-mix(in srgb, var(--theme-primary) 20%, transparent)',
                   }}
                 >
-                  <p className="text-xs font-bold uppercase tracking-widest text-yellow-500 mb-1">💡 Pro Tip</p>
-                  <p className="text-sm text-slate-300">{lesson.tip}</p>
+                  <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: 'var(--theme-primary)' }}>💡 Pro Tip</p>
+                  <p className="text-sm" style={{ color: 'var(--theme-text-body)' }}>{lesson.tip}</p>
                 </div>
               )}
 
@@ -219,13 +220,13 @@ export default function LessonModal({
                           >
                             {done && (
                               <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-                                <path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                <path d="M1 4L3.5 6.5L9 1" stroke="var(--theme-text-on-filled)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                               </svg>
                             )}
                           </button>
                           <span
                             className="text-sm leading-relaxed transition-all duration-150"
-                            style={{ color: done ? '#475569' : '#cbd5e1', textDecoration: done ? 'line-through' : 'none' }}
+                            style={{ color: done ? 'var(--theme-text-dim)' : 'var(--theme-text-body)', textDecoration: done ? 'line-through' : 'none' }}
                           >
                             {task}
                           </span>
@@ -257,7 +258,7 @@ export default function LessonModal({
             onClick={() => lessonId && canGoPrev && onNavigate(lessonId - 1)}
             disabled={!canGoPrev}
             className="px-3 py-2 rounded-xl text-sm font-medium transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: '#94a3b8' }}
+            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: 'var(--theme-text-muted)' }}
           >
             ← Week {lessonId && lessonId > 1 ? lessonId - 1 : ''}
           </button>
@@ -285,7 +286,7 @@ export default function LessonModal({
                   className="px-4 py-2 rounded-xl font-semibold text-sm tracking-wide transition-all duration-200 hover:scale-105 active:scale-95 disabled:opacity-60"
                   style={{
                     background: 'linear-gradient(135deg, var(--theme-success-bright), var(--theme-success))',
-                    color: '#fff',
+                    color: 'var(--theme-text-on-filled)',
                     boxShadow: '0 4px 16px color-mix(in srgb, var(--theme-success) 30%, transparent)',
                   }}
                 >
@@ -308,7 +309,7 @@ export default function LessonModal({
               border: `1px solid ${canGoNext
                 ? 'color-mix(in srgb, var(--theme-primary) 30%, transparent)'
                 : 'rgba(255,255,255,0.07)'}`,
-              color: canGoNext ? 'var(--theme-primary)' : '#475569',
+              color: canGoNext ? 'var(--theme-primary)' : 'var(--theme-text-dim)',
             }}
           >
             Week {lessonId && lessonId < totalLessons ? lessonId + 1 : ''} {nextLocked ? '🔒' : '→'}

@@ -15,7 +15,8 @@ interface Props {
 function LockIcon() {
   return (
     <svg
-      className="w-2.5 h-2.5 text-slate-500"
+      className="w-2.5 h-2.5"
+      style={{ color: 'var(--theme-text-faint)' }}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -47,7 +48,7 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
             ? 'var(--theme-success-bright)'
             : isUnlocked
             ? 'var(--theme-primary)'
-            : 'var(--theme-border)',
+            : 'var(--theme-text-locked)',
         }}
       >
         W{String(lesson.day).padStart(2, '0')}
@@ -73,8 +74,9 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
         />
         {isCompleted && (
           <span
-            className="absolute -bottom-1 -right-1 flex items-center justify-center w-4 h-4 text-white"
+            className="absolute -bottom-1 -right-1 flex items-center justify-center w-4 h-4"
             style={{
+              color: 'var(--theme-text-on-filled)',
               background: 'var(--theme-success)',
               border: '1px solid var(--theme-surface)',
               borderRadius: '2px',
@@ -116,7 +118,7 @@ function DoorCard({ lesson, isUnlocked, isCompleted, onClick }: {
               ? 'color-mix(in srgb, var(--theme-success-bright) 80%, transparent)'
               : isUnlocked
               ? 'color-mix(in srgb, var(--theme-primary) 75%, transparent)'
-              : 'rgba(255,255,255,0.25)',
+              : 'color-mix(in srgb, var(--theme-text-locked) 40%, transparent)',
           }}
         >
           {lesson.title}
@@ -195,7 +197,7 @@ export default function CalendarGrid({ lessons, completedDays, role, errorDay, v
       </div>
 
       {/* Legend — square swatches, monospace labels per retro spec */}
-      <div className="flex items-center gap-6 mt-6 text-xs text-slate-500">
+      <div className="flex items-center gap-6 mt-6 text-xs" style={{ color: 'var(--theme-text-faint)' }}>
         <span className="flex items-center gap-2">
           <span
             className="inline-block w-3 h-3"

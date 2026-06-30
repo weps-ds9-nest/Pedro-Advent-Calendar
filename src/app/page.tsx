@@ -50,10 +50,10 @@ export default async function DashboardPage({ searchParams }: PageProps) {
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-3">
           <span className="gold-shimmer">Claude Code</span>
         </h1>
-        <p className="text-2xl sm:text-3xl font-semibold text-slate-200">
+        <p className="text-2xl sm:text-3xl font-semibold" style={{ color: 'var(--theme-text-secondary)' }}>
           Advent Calendar 🎄
         </p>
-        <p className="text-slate-400 mt-3 text-sm">
+        <p className="mt-3 text-sm" style={{ color: 'var(--theme-text-muted)' }}>
           Complete each week sequentially to unlock the next lesson.
         </p>
 
@@ -69,7 +69,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
       />
 
       {/* Footer */}
-      <footer className="mt-16 text-center text-xs text-slate-600">
+      <footer className="mt-16 text-center text-xs" style={{ color: 'var(--theme-text-dim)' }}>
         <p>Internal use only · Claude Code Advent Calendar</p>
       </footer>
     </main>

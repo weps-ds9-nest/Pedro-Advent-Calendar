@@ -28,6 +28,17 @@
   --theme-danger:         var(--color-crimson-500); /* #c0392b */
   --theme-danger-bright:  var(--color-crimson-400); /* #e74c3c */
 
+  /* ── Neutral text scale ──────────────────────────────────────────── */
+  /* Replaces Tailwind text-slate-N classes — one change here repaints all text */
+  --theme-text-primary:   #f1f5f9;  /* slate-100 — headings, titles, main content */
+  --theme-text-secondary: #e2e8f0;  /* slate-200 — subtitles, strong body        */
+  --theme-text-body:      #cbd5e1;  /* slate-300 — descriptions, body copy       */
+  --theme-text-muted:     #94a3b8;  /* slate-400 — captions, secondary info      */
+  --theme-text-faint:     #64748b;  /* slate-500 — helpers, placeholders         */
+  --theme-text-dim:       #475569;  /* slate-600 — done state, footer            */
+  --theme-text-on-filled: #ffffff;  /* always white — text on jade/crimson fills  */
+  --theme-text-locked:    #1a1f38;  /* navy-700 — barely-visible text on locked/disabled elements */
+
   /* ── Typography ─────────────────────────────────────────────────── */
   /* Families — reference @theme vars so a new theme can swap both at once */
   --theme-font-body:    var(--font-sans);
@@ -130,6 +141,15 @@
   opacity: 0.65;
 }
 
+/* ── Admin toolbar interactive button ────────────────────────────── */
+/* Needs CSS :hover, so can't use inline style */
+.toolbar-btn-inactive {
+  color: var(--theme-text-muted);
+}
+.toolbar-btn-inactive:hover {
+  color: var(--theme-text-secondary);
+}
+
 /* ── Typography utilities ─────────────────────────────────────────── */
 /* Compose these classes to apply the theme's type scale.
    Figma equivalents: typography/* variables + named text styles.     */
@@ -172,6 +192,11 @@
 ::-webkit-scrollbar-thumb {
   background: var(--color-navy-700);
   border-radius: 3px;
+}
+
+/* ── Base text color ───────────────────────────────────────────────── */
+body {
+  color: var(--theme-text-primary);
 }
 
 /* ── Star field background ─────────────────────────────────────────── */

@@ -90,7 +90,7 @@ export default function CourseCompletionModal({ open, onClose }: Props) {
 
           {/* Body */}
           <div className="px-8 py-7 space-y-5" style={{ maxWidth: '70ch' }}>
-            <p className="text-slate-200 text-base leading-relaxed">
+            <p className="text-base leading-relaxed" style={{ color: 'var(--theme-text-secondary)' }}>
               You have walked the full path — all 24 weeks of the Claude Code curriculum. San Pedro, eternal guardian of the digital threshold, recognises your dedication and grants you his blessing.
             </p>
 
@@ -99,11 +99,11 @@ export default function CourseCompletionModal({ open, onClose }: Props) {
               style={{ background: 'linear-gradient(90deg, var(--theme-primary), transparent)' }}
             />
 
-            <p className="text-slate-300 text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--theme-text-body)' }}>
               You may now walk the Claude Code way for research: your queries precise, your prompts clear, your context well-managed. The path ahead is open — use these tools with wisdom, patience, and curiosity.
             </p>
 
-            <p className="text-slate-400 text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--theme-text-muted)' }}>
               Go forth, and may every token serve you well. 🎄
             </p>
           </div>

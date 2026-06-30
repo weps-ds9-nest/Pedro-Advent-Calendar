@@ -75,7 +75,7 @@ export default function Dashboard({ lessons, completedDays, role, errorDay, view
         </div>
       ) : role !== 'admin' ? (
         <div className="mb-8 max-w-sm mx-auto">
-          <div className="flex justify-between text-xs text-slate-500 mb-1.5">
+          <div className="flex justify-between text-xs mb-1.5" style={{ color: 'var(--theme-text-faint)' }}>
             <span>Progress</span>
             <span>{completedDays.length} / {TOTAL_LESSONS} weeks</span>
           </div>
