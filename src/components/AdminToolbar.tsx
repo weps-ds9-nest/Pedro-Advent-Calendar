@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { logoutAction } from '@/app/actions'
 
 type ViewMode = 'admin' | 'student-real' | 'student-simulated'
 
@@ -143,6 +144,19 @@ export default function AdminToolbar({ currentViewMode, initialCompletedCount }:
         >
           {saving ? 'Applying...' : 'Apply'}
         </button>
+        <form action={logoutAction}>
+          <button
+            type="submit"
+            className="px-2.5 py-1 rounded-lg font-medium border transition-all hover:opacity-80 active:scale-95"
+            style={{
+              borderColor: 'color-mix(in srgb, var(--color-crimson-500) 40%, transparent)',
+              color: 'var(--color-crimson-500)',
+              background: 'color-mix(in srgb, var(--color-crimson-500) 10%, transparent)',
+            }}
+          >
+            Log out
+          </button>
+        </form>
       </div>
     </div>
   )

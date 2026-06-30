@@ -4,6 +4,7 @@ import { getProgress } from '@/lib/kv'
 import lessonsData from '@/data/lessons.json'
 import type { Lesson } from '@/types/lesson'
 import { redirect } from 'next/navigation'
+import { logoutAction } from './actions'
 
 interface PageProps {
   searchParams: Promise<{ error?: string }>
@@ -43,8 +44,25 @@ export default async function DashboardPage({ searchParams }: PageProps) {
     <main className="min-h-screen px-4 py-12 max-w-5xl mx-auto relative z-10">
       {/* Header */}
       <header className="text-center mb-12">
-        <div className={`chip mb-6 ${role === 'admin' ? 'chip-danger' : 'chip-primary'}`}>
-          {viewAsStudent ? '👁 Pedro\'s View' : role === 'admin' ? '🔑 Admin View' : '🎓 Student'}
+        <div className="flex items-center justify-center gap-3 mb-6">
+          <div className={`chip ${role === 'admin' ? 'chip-danger' : 'chip-primary'}`}>
+            {viewAsStudent ? '👁 Pedro\'s View' : role === 'admin' ? '🔑 Admin View' : '🎓 Student'}
+          </div>
+          {role !== 'admin' && (
+            <form action={logoutAction}>
+              <button
+                type="submit"
+                className="text-xs px-2.5 py-1 rounded-md border font-medium transition-all hover:opacity-80 active:scale-95"
+                style={{
+                  borderColor: 'var(--color-navy-700)',
+                  color: 'var(--theme-text-muted)',
+                  background: 'var(--color-navy-800)',
+                }}
+              >
+                Log out
+              </button>
+            </form>
+          )}
         </div>
 
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-3">

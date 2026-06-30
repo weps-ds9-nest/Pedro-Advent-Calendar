@@ -2,7 +2,7 @@
 
 import { cookies, headers } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { createSession } from '@/lib/session'
+import { createSession, deleteSession } from '@/lib/session'
 import { markComplete } from '@/lib/kv'
 
 function resolveTargetRole(role: string, actualRole: string | null): string {
@@ -47,6 +47,18 @@ export async function loginAction(
   })
 
   redirect('/')
+}
+
+// ── Logout ─────────────────────────────────────────────────────────────────
+
+export async function logoutAction() {
+  const cookieStore = await cookies()
+  const token = cookieStore.get('auth_token')?.value
+  if (token) {
+    await deleteSession(token)
+  }
+  cookieStore.delete('auth_token')
+  redirect('/login')
 }
 
 // ── Mark lesson complete ───────────────────────────────────────────────────
