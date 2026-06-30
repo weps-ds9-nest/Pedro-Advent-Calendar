@@ -1,32 +1,46 @@
 # Day 1: Meeting the Terminal & Claude Code
-**Description:** Get comfortable opening a terminal, moving around folders, and starting/stopping a Claude Code session.
+**Description:** Install Claude Code, learn where it lives, and have your very first conversation with it.
 **Tip:** Run `claude` in your terminal to start a session, and `Ctrl+C` or `exit` to stop it.
 
 **Phase 1 — Foundations**
 
-Welcome to Week 1! Before we touch Claude Code, we need to feel at home in the terminal. Think of it as learning to walk in a new city before running.
+Welcome to Week 1! Claude Code is an AI assistant that lives right inside your terminal (or your code editor). Unlike a browser-based chatbot, it can see the files on your computer, run commands, and take action — all from a simple chat interface. This week we get it installed and say hello.
 
-**New concepts & commands:**
+**What is Claude Code?**
 
-- What a terminal is and what "the current directory" means
-- `pwd` — print working directory ("where am I?")
-- `ls` — list files in the current folder
-- `cd` — change directory (move into a folder)
-- `mkdir` — create a new folder
-- Installing Claude Code and logging in
-- Starting Claude Code with `claude`, exiting with `Ctrl+C` / `exit`
+Claude Code is a command-line tool made by Anthropic. You open a terminal, type `claude`, and you're in a conversation with an AI that can read your files, create new ones, run scripts, and help you think through problems — all without leaving your keyboard.
+
+You don't have to use a terminal if you prefer a code editor. Claude Code installs as a plugin for the most popular IDEs:
+
+- **VS Code** → [install from the Marketplace](https://marketplace.visualstudio.com/items?itemName=Anthropic.claude-code)
+- **JetBrains** (IntelliJ, PyCharm, WebStorm…) → [install from the Plugin Hub](https://plugins.jetbrains.com/plugin/24169-claude-code)
+- **Terminal** → follow the [official getting-started guide](https://docs.anthropic.com/en/docs/claude-code/getting-started)
+
+Whichever you choose, the experience is the same: a chat panel where you talk to Claude and it acts on your project.
+
+**A little terminal vocabulary (you'll need this):**
+
+- **Terminal / shell** — the text window where you type commands
+- **Current directory** — the folder the terminal is "inside" right now
+- `pwd` — shows your current directory ("where am I?")
+- `ls` — lists files in the current folder
+- `cd <folder>` — moves into a folder
+- `mkdir <name>` — creates a new folder
+
+You only need these to navigate to the right folder before opening Claude Code. Once Claude is running, you can just ask it in plain English — "what files are here?" works just as well as `ls`.
 
 **This week's exercise:**
 
-Create a folder called `research-playground` on your Desktop, `cd` into it, and open Claude Code there. Ask it: "What folder am I in and what's in it?" — notice how it answers.
+Create a folder called `research-playground` on your Desktop, navigate into it, and open Claude Code there. Then ask it: *"What folder am I in and what files does it contain?"* — notice how it answers using real information from your computer, not a generic response.
 
-**Make it yours:** Practice navigating to 2–3 different folders on your computer (Desktop, Documents, a project folder) using only `cd` and `ls` — no mouse allowed.
+**Make it yours:** Ask Claude Code to create a file called `hello.md` inside the folder and write a one-sentence introduction to itself. Open the file and read what it wrote.
 
 ### Tasks
-- Open your terminal and run `pwd` — confirm you can see your current folder path
-- Use `cd` and `ls` to navigate to your Desktop and list its contents
-- Create a folder called `research-playground` using `mkdir` and `cd` into it
-- Install Claude Code and run `claude` to start your first session — then exit with `Ctrl+C`
+- Install Claude Code using whichever method fits your setup (terminal, VS Code, or JetBrains — links above)
+- Open your terminal, run `pwd` to see where you are, then use `cd` and `mkdir` to create and enter a folder called `research-playground` on your Desktop
+- Start a Claude Code session (`claude` in the terminal, or open the panel in your IDE)
+- Ask Claude: *"What folder am I in and what's in it?"* — confirm it gives you a real answer about your machine
+- Ask Claude to create `hello.md` with a one-sentence description of itself, then open the file
 
 # Day 2: Talking to Claude Code
 **Description:** Learn the basic conversational loop — asking, reading responses, and referencing files.
